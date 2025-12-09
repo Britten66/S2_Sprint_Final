@@ -26,6 +26,63 @@ npm run dev
 3. Merge to `dev` when done
 4. Merge `dev` → `main` only for final submission
 
+## User Flow
+```
+                          START
+                            ↓
+                    ┌───────────────┐
+                    │ Landing Page  │
+                    └───────────────┘
+                            ↓
+                    [Browse Games]
+                            ↓
+                 ┌──────────────────────┐
+                 │ Store/Search Page    │
+                 │ (Filter & Search)    │
+                 └──────────────────────┘
+                            ↓
+                    [Add to Cart]
+                            ↓
+                    ┌──────────────┐
+                    │  Cart Page   │
+                    └──────────────┘
+                            ↓
+                [Proceed to Checkout]
+                            ↓
+                    ┌──────────────┐
+                    │ Login Check? │
+                    └──────────────┘
+                      ↓           ↓
+              Not Logged In   Logged In
+                      ↓           ↓
+              ┌──────────────┐    │
+              │  Login Page  │    │
+              └──────────────┘    │
+                      ↓           │
+                      └───────────┘
+                            ↓
+                   ┌──────────────┐
+                   │Checkout Page │
+                   └──────────────┘
+                            ↓
+                [Complete Purchase]
+                            ↓
+                 Order Confirmation
+                            ↓
+                          END
+```
+
+### Quick Paths
+
+**Guest User:**  
+`Landing → Store → Cart → Login → Checkout → Confirmation`
+
+**Logged-In User:**  
+`Landing → Store → Cart → Checkout → Confirmation`
+
+**Direct Navigation:**  
+User can navigate to any page via Navbar at any time
+
 ## Team
 - Christopher Britten
 - Justin Seaward
