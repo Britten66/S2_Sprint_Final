@@ -1,4 +1,4 @@
-# Steam Clone - QAP3 Project
+# Steam Clone - FINAL SPRINT
 
 React-based Steam platform clone.
 
