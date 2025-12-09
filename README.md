@@ -1,4 +1,4 @@
-# Steam Clone - FINAL SPRINT
+# REACT/RTL/- FINAL SPRINT 
 
 React-based Steam platform clone.
 
