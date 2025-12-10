@@ -1,5 +1,12 @@
 body {
+  margin: 0;
+  padding: 0;
+}
+
+.main-cart-container {
   display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
 }
 
 .cart-btn {
@@ -15,5 +22,14 @@ body {
   min-width: 800px;
   min-height: 138px;
   background-color: #2f3439;
+  justify-content: left;
+  margin: 1rem;
   /* opacity: 50%; */
+}
+
+.cart-right-container {
+  min-width: 400px;
+  min-height: 168px;
+  background-color: #2f3439;
+  justify-content: right;
 }
