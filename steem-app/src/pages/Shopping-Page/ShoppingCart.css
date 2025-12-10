@@ -1,0 +1,19 @@
+body {
+  display: grid;
+}
+
+.cart-btn {
+  background-color: #4d9ff2;
+  color: white;
+  justify-content: end;
+  position: fixed;
+  top: 70px;
+  right: 10px;
+}
+
+.cart-items-left-container {
+  min-width: 800px;
+  min-height: 138px;
+  background-color: #2f3439;
+  /* opacity: 50%; */
+}
