@@ -8,7 +8,7 @@ const ShoppingCart = () => {
   };
 
   return (
-    <>
+    <div className="main-cart-container">
       <button className="cart-btn" onClick={onClick}>
         <FaCartPlus /> Cart {cart}
       </button>
@@ -21,10 +21,10 @@ const ShoppingCart = () => {
       </div>
       <div className="cart-right-container">
         <h3>Payment Options</h3>
-        <p>Sales tax will be calculated during checkout where applicable</p>
+        <p>Sales tax will be calculated during checkout</p>
         <button className="payment-options"></button>
       </div>
-    </>
+    </div>
   );
 };
 
