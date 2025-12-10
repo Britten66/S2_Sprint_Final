@@ -2,11 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import LandingPage from "./pages/Landing-Page/landing.jsx";
 import LoginPage from "./pages/Log-in-Page/login.jsx";
-<<<<<<< HEAD
 import ShoppingCart from "./pages/Shopping-Page/ShoppingCart.jsx";
-=======
 import StorePage from "./pages/Store-Page/store.jsx";
->>>>>>> feature/home-page
 import "./App.css";
 
 function App() {
