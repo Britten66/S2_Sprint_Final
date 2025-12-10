@@ -40,3 +40,16 @@
 .read-the-docs {
   color: #888;
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding-top: 70px; /* Space for fixed navbar */
+  min-height: 100vh;
+  background-color: #1b2838;
+  color: white;
+}
