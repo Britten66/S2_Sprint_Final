@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./ShoppingCart.css";
 const ShoppingCart = () => {
   const [cart, setCart] = useState(0);
   const onClick = () => {

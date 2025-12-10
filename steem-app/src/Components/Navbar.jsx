@@ -13,7 +13,7 @@ function Navbar() {
           <Link to="/store">Store</Link>
         </li>
         <li>
-          <Link to="/cart">Cart</Link>
+          <Link to="/ShoppingCart">Cart</Link>
         </li>
         <li>
           <Link to="/login">Login</Link>
