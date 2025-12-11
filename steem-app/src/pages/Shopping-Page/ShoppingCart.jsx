@@ -12,17 +12,16 @@ const ShoppingCart = () => {
       <button className="cart-btn" onClick={onClick}>
         <FaCartPlus /> Cart {cart}
       </button>
+      <h2>Shopping Cart</h2>
       <div className="cart-items-left-container">
-        {cart === 0 ? (
-          <h2>Shopping Cart is Empty</h2>
-        ) : (
-          `You have ${cart} item(s) in your cart`
-        )}
+        {cart === 0
+          ? `Shopping cart is empty`
+          : `You have ${cart} item(s) in your cart`}
       </div>
       <div className="cart-right-container">
-        <h3>Payment Options</h3>
+        <p>Estimated total</p> <p>C$ {cart}</p>
         <p>Sales tax will be calculated during checkout</p>
-        <button className="payment-options"></button>
+        <button className="payment-form-btn">Countinue to Payment</button>
       </div>
     </div>
   );

@@ -1,0 +1,38 @@
+{
+  "user": [
+    {
+      "id": "2e43",
+      "firstname": "Rusty",
+      "lastname": "Shakleford",
+      "streetaddress": "123 fake street",
+      "pobox": "",
+      "country": "canada",
+      "city": "Deep bite",
+      "province": "Newfoundland",
+      "postalcode": "A0B0A1",
+      "phonenumber": "7094657689",
+      "paytype": "visa",
+      "cardnumber": "1234456778986542",
+      "expireday": "10",
+      "exprieyear": "28",
+      "cardcode": "333"
+    },
+    {
+      "id": "7n28",
+      "firstname": "Bill",
+      "lastname": "Hicks",
+      "streetaddress": "125 high street",
+      "pobox": "",
+      "country": "canada",
+      "city": "Addytown",
+      "province": "Newfoundland",
+      "postalcode": "A0B9B7",
+      "phonenumber": "7097270652",
+      "paytype": "visa",
+      "cardnumber": "7895643245678524",
+      "expireday": "23",
+      "exprieyear": "27",
+      "cardcode": "975"
+    }
+  ]
+}
