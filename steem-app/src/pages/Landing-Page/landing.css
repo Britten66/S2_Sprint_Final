@@ -1,110 +1,128 @@
+/* HERO SECTION - Main landing banner at the top */
 .hero {
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 4rem 2rem; /* Top/bottom 4rem, left/right 2rem */
+  /* Steam-like gradient - dark blue to lighter blue */
   background: linear-gradient(135deg, #1b2838 0%, #2a475e 100%);
   border-radius: 5px;
 }
 
+/* Main "Steem" title styling */
 .hero h1 {
-  font-size: 3rem;
+  font-size: 3rem; /* Big and bold */
   margin-bottom: 1rem;
   border-radius: 15px;
 }
 
+/* Tagline under the title */
 .hero p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
-  color: #c7d5e0;
+  color: #c7d5e0; /* Light grayish-blue for contrast */
 }
 
+/* "Browse Games" button - Steam blue style */
 .cta-button {
   padding: 1rem 2rem;
   font-size: 1.1rem;
-  background-color: #66c0f4;
-  color: #1b2838;
+  background-color: #66c0f4; /* Steam signature blue */
+  color: #1b2838; /* Dark text on light button */
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
 }
 
+/* Button hover state - slightly darker blue */
 .cta-button:hover {
   background-color: #5aaedb;
 }
 
+/* FEATURED GAMES SECTION - Carousel container */
 .featured-games {
   padding: 4rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 1200px; /* Keep it centered and not too wide */
+  margin: 0 auto; /* Center the whole section */
 }
 
+/* "Featured Games" heading */
 .featured-games h2 {
   text-align: center;
   margin-bottom: 2rem;
   font-size: 2rem;
 }
 
+/* CAROUSEL - Main carousel layout with arrows */
 .carousel {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  display: flex; /* Left arrow, content, right arrow in a row */
+  align-items: center; /* Vertically center everything */
+  gap: 1rem; /* Space between elements */
   position: relative;
 }
 
+/* LEFT/RIGHT ARROW BUTTONS */
 .carousel-btn {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
   color: white;
   border: none;
   padding: 1rem 1.5rem;
-  font-size: 2rem;
+  font-size: 2rem; /* Big arrows */
   cursor: pointer;
-  border-radius: 50%;
-  transition: background 0.3s;
+  border-radius: 50%; /* Makes them circular */
+  transition: background 0.3s; /* Smooth hover effect */
 }
 
+/* Arrow buttons get darker on hover */
 .carousel-btn:hover {
   background: rgba(0, 0, 0, 0.8);
 }
 
+/* CAROUSEL CONTENT - The actual game display area */
 .carousel-content {
-  flex: 1;
+  flex: 1; /* Takes up all available space between arrows */
   text-align: center;
 }
 
+/* Game image styling */
 .game-image {
   width: 100%;
-  max-width: 600px;
-  height: 400px;
-  object-fit: cover;
+  max-width: 600px; /* Don't let it get too big */
+  height: 400px; /* Fixed height */
+  object-fit: cover; /* Crop image to fit without distortion */
   border-radius: 8px;
   margin-bottom: 1rem;
 }
 
+/* Game title under the image */
 .game-info h3 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
+/* DOTS NAVIGATION - The little circles under carousel */
 .carousel-indicators {
   display: flex;
-  justify-content: center;
-  gap: 0.5rem;
+  justify-content: center; /* Center the dots */
+  gap: 0.5rem; /* Space between dots */
   margin-top: 1rem;
 }
 
+/* Individual dot styling */
 .carousel-indicators span {
   width: 10px;
   height: 10px;
-  border-radius: 50%;
-  background: #ccc;
+  border-radius: 50%; /* Makes them circular */
+  background: #ccc; /* Gray by default */
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s; /* Smooth color change */
 }
 
+/* Active dot - shows which slide you're on */
 .carousel-indicators span.active {
-  background: #007bff;
+  background: #007bff; /* Blue to stand out */
 }
 
+/* LOADING/ERROR STATES - Just in case */
 .loading, .error {
   text-align: center;
   padding: 2rem;

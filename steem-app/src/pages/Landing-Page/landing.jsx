@@ -1,7 +1,15 @@
+
+// importing navigation between pages via router
+
 import { useNavigate } from "react-router-dom";
+
+//adding useState
 import { useState } from "react";
 import "./landing.css";
 
+
+// featured games here 
+// this is a hard coded section with images linked by https 
 const FEATURED_GAMES = [
   {
     id: 1,
@@ -10,6 +18,7 @@ const FEATURED_GAMES = [
       "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg",
     rating: 4.8,
   },
+
   {
     id: 2,
     name: "Baldur's Gate 3",
@@ -39,22 +48,39 @@ const FEATURED_GAMES = [
   },
 ];
 
+
+// landing page with navigation 
 function LandingPage() {
   const navigate = useNavigate();
+  // current index set state = 0
   const [currentIndex, setCurrentIndex] = useState(0);
+
 
   const nextSlide = () => {
     setCurrentIndex((prev) =>
+      //if game length = last slide look back to 0 OR just add one " : < - this is sneaky " 
       prev === FEATURED_GAMES.length - 1 ? 0 : prev + 1
     );
   };
+// like this 4 === 4 ? (loops back)
+// since 4 is the end 
 
   const prevSlide = () => {
     setCurrentIndex((prev) =>
+      // HERE if we are on the FIRST slide we are going to loop to the last slide ( - 1 )
+    // otherwise it just will subtract 1 
+    // usign the : 
       prev === 0 ? FEATURED_GAMES.length - 1 : prev - 1
     );
   };
+//0 === 0  = YES (loops to end) = 4
+// this is good practice because it keeps everything up to the most recent state increasing efficiency 
 
+
+
+   // inside this return statemetn is the content being displayed on the page 
+  // below will just contain the portion of the landing page with the intro and CTA to enter our store.
+   
   return (
     <div className="landing-page">
       
