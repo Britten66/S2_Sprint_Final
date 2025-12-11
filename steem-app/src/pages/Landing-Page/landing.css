@@ -1,130 +1,234 @@
-/* HERO SECTION - Main landing banner at the top */
+/* HERO SECTION - Main container for landing page header */
 .hero {
   text-align: center;
-  padding: 4rem 2rem; /* Top/bottom 4rem, left/right 2rem */
-  /* Steam-like gradient - dark blue to lighter blue */
-  background: linear-gradient(135deg, #1b2838 0%, #2a475e 100%);
-  border-radius: 5px;
+  padding: 3rem 0; /* Top/bottom padding, no left/right to allow full width */
+  background: linear-gradient(
+    135deg,
+    #1b2838 0%,
+    #2a475e 100%
+  ); /* Steam-style gradient */
+  border-radius: 8px;
+  max-width: 1400px; /* Keeps hero from getting too wide on large screens */
+  margin: 0 auto; /* Centers the hero section */
 }
 
-/* Main "Steem" title styling */
+/* Main "Steem" title */
 .hero h1 {
-  font-size: 3rem; /* Big and bold */
-  margin-bottom: 1rem;
-  border-radius: 15px;
+  font-size: 3.5rem;
+  margin-bottom: 0.5rem;
 }
 
-/* Tagline under the title */
-.hero p {
-  font-size: 1.2rem;
+/* Tagline under title */
+.hero > p {
+  font-size: 1.3rem;
   margin-bottom: 2rem;
-  color: #c7d5e0; /* Light grayish-blue for contrast */
+  color: #c7d5e0; /* Light grayish-blue */
 }
 
-/* "Browse Games" button - Steam blue style */
+/* "Browse Games" call-to-action button */
 .cta-button {
-  padding: 1rem 2rem;
+  padding: 1rem 2.5rem;
   font-size: 1.1rem;
   background-color: #66c0f4; /* Steam signature blue */
-  color: #1b2838; /* Dark text on light button */
+  color: #1b2838; /* Dark text */
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+  margin-bottom: 2rem; /* Space before carousel starts */
 }
 
-/* Button hover state - slightly darker blue */
+/* Button hover effect - slightly darker blue */
 .cta-button:hover {
   background-color: #5aaedb;
 }
 
-/* FEATURED GAMES SECTION - Carousel container */
-.featured-games {
-  padding: 4rem 2rem;
-  max-width: 1200px; /* Keep it centered and not too wide */
-  margin: 0 auto; /* Center the whole section */
+/* CAROUSEL WRAPPER - Container for entire carousel section */
+.carousel-wrapper {
+  width: 100%; /* Full width to stretch like Steam */
+  padding: 2rem 3rem; /* Breathing room on all sides */
 }
 
 /* "Featured Games" heading */
-.featured-games h2 {
-  text-align: center;
-  margin-bottom: 2rem;
+.carousel-wrapper h2 {
+  margin-bottom: 1.5rem;
   font-size: 2rem;
-}
-
-/* CAROUSEL - Main carousel layout with arrows */
-.carousel {
-  display: flex; /* Left arrow, content, right arrow in a row */
-  align-items: center; /* Vertically center everything */
-  gap: 1rem; /* Space between elements */
-  position: relative;
-}
-
-/* LEFT/RIGHT ARROW BUTTONS */
-.carousel-btn {
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
   color: white;
+}
+
+/* CAROUSEL - Contains arrows and content in a row */
+.carousel {
+  display: flex; /* Left arrow, image/content, right arrow in a row */
+  align-items: center; /* Vertically center everything */
+  justify-content: center; /* Horizontally center everything */
+  gap: 2rem; /* Space between arrows and content */
+  margin-bottom: 1.5rem; /* Space before dots */
+}
+
+/* CAROUSEL BUTTONS - Left and right arrow buttons */
+.carousel-btn {
+  background: transparent; /* No background, just the arrow character */
+  color: rgba(255, 255, 255, 0.6); /* Semi-transparent white arrows */
   border: none;
-  padding: 1rem 1.5rem;
-  font-size: 2rem; /* Big arrows */
+  width: 40px;
+  height: 40px;
+  font-size: 2.5rem; /* Big arrow characters */
   cursor: pointer;
-  border-radius: 50%; /* Makes them circular */
-  transition: background 0.3s; /* Smooth hover effect */
+  flex-shrink: 0; /* Prevents arrows from shrinking */
+  transition: all 0.3s; /* Smooth hover effect */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers arrow character perfectly */
+  line-height: 1; /* Removes extra line spacing */
 }
 
-/* Arrow buttons get darker on hover */
+/* Arrow button hover - becomes fully white and slightly bigger */
 .carousel-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  transform: scale(1.2);
 }
 
-/* CAROUSEL CONTENT - The actual game display area */
+/* Arrow button focus - removes the sticky hover after clicking */
+.carousel-btn:focus {
+  outline: none; /* Removes default browser outline */
+  color: rgba(255, 255, 255, 0.6); /* Resets to default color */
+}
+
+/* Arrow button active - brief white flash when clicking */
+.carousel-btn:active {
+  color: white;
+}
+
+/* CAROUSEL CONTENT - The actual game display area (image + text) */
 .carousel-content {
   flex: 1; /* Takes up all available space between arrows */
-  text-align: center;
+  max-width: none; /* Allows content to stretch full width */
 }
 
-/* Game image styling */
+/* GAME IMAGE - The big game header image */
 .game-image {
-  width: 100%;
-  max-width: 600px; /* Don't let it get too big */
-  height: 400px; /* Fixed height */
-  object-fit: cover; /* Crop image to fit without distortion */
-  border-radius: 8px;
-  margin-bottom: 1rem;
+  width: 100%; /* Fills the available width */
+  max-width: 940px; /* Steam's typical header width */
+  margin: 0 auto; /* Centers the image */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6); /* Nice shadow effect */
+  margin-bottom: 1rem; /* Space before game title */
+  display: block; /* Ensures proper centering */
 }
 
-/* Game title under the image */
-.game-info h3 {
-  font-size: 1.5rem;
+/* Game title text below image */
+.carousel-content h3 {
+  font-size: 1.8rem;
   margin-bottom: 0.5rem;
+  color: white;
 }
 
-/* DOTS NAVIGATION - The little circles under carousel */
-.carousel-indicators {
+/* Rating text with star emoji */
+.carousel-content p {
+  font-size: 1.2rem;
+  color: #c7d5e0; /* Light grayish-blue */
+}
+
+/* DOTS NAVIGATION - The clickable indicator dots */
+.dots {
   display: flex;
-  justify-content: center; /* Center the dots */
-  gap: 0.5rem; /* Space between dots */
-  margin-top: 1rem;
+  justify-content: center; /* Centers all dots horizontally */
+  gap: 0.6rem; /* Space between each dot */
 }
 
 /* Individual dot styling */
-.carousel-indicators span {
+.dots span {
   width: 10px;
   height: 10px;
   border-radius: 50%; /* Makes them circular */
-  background: #ccc; /* Gray by default */
-  cursor: pointer;
-  transition: background 0.3s; /* Smooth color change */
+  background: rgba(255, 255, 255, 0.4); /* Semi-transparent white */
+  cursor: pointer; /* Shows it's clickable */
+  transition: all 0.3s; /* Smooth color/size changes */
 }
 
-/* Active dot - shows which slide you're on */
-.carousel-indicators span.active {
-  background: #007bff; /* Blue to stand out */
+/* Dot hover effect - slightly more visible */
+.dots span:hover {
+  background: rgba(255, 255, 255, 0.6);
 }
 
-/* LOADING/ERROR STATES - Just in case */
-.loading, .error {
-  text-align: center;
-  padding: 2rem;
-  font-size: 1.2rem;
+/* Active dot - shows which slide you're currently on */
+.dots span.active {
+  background: #66c0f4; /* Steam blue */
+  transform: scale(1.3); /* Slightly bigger than other dots */
+}
+
+/* =========================================
+   ANIMATED PNG FLAKES
+   - Uses 3 layered PNGs
+========================================= */
+.snow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: 2;
+  pointer-events: none;
+
+  background: none;
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/191814/flake1.png"),
+    url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/191814/flake2.png"),
+    url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/191814/flake3.png");
+  background-repeat: repeat;
+  background-size: 600px 600px;
+
+  /* Single standard animation, no vendor prefixes needed now */
+  animation: snow 20s linear infinite;
+}
+
+/* =========================================
+   KEYFRAMES – shared by both layers
+   - Moves multiple background layers
+     at different speeds/directions
+========================================= */
+@keyframes snow {
+  0% {
+    background-position: 0px 0px, 0px 0px, 0px 0px;
+  }
+  50% {
+    background-position: 500px 500px, 100px 200px, -100px 150px;
+  }
+  100% {
+    background-position: 500px 1000px, 200px 400px, -100px 300px;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+
+  /* Main winter-night gradient */
+  background: radial-gradient(
+      circle at 50% 120%,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0) 60%
+    ),
+    radial-gradient(
+      circle at 80% 0%,
+      rgba(0, 140, 255, 0.25) 0%,
+      rgba(0, 0, 0, 0) 50%
+    ),
+    radial-gradient(
+      circle at 20% -10%,
+      rgba(255, 200, 255, 0.25) 0%,
+      rgba(0, 0, 0, 0) 45%
+    ),
+    linear-gradient(
+      to bottom,
+      #0a0f1e 0%,
+      #0b1224 30%,
+      #08101f 60%,
+      #050b16 100%
+    );
+
+  background-attachment: fixed;
+  color: white;
+  overflow-x: hidden;
 }
