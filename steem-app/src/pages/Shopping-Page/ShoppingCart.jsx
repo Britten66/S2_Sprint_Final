@@ -4,16 +4,17 @@ import "./ShoppingCart.css";
 const ShoppingCart = () => {
   const [cart, setCart] = useState(0);
   const [cartItems, setCartItems] = useState([]);
-  setCartItems((prevItems) => {
-    const newItem = {
-      ...productToAdd,
-      quantity: 1,
-    };
+  // setCartItems((prevItems) => {
+  //   const newItem = {
+      
+  //     ...productToAdd,
+  //     quantity: 1,
+  //   };
 
-    return [
-      /* What goes here to return a NEW array? */
-    ];
-  });
+  //   return [
+  //     /* What goes here to return a NEW array? */
+  //   ];
+  // });
   const onClick = () => {
     setCart(cart + 1);
   };
