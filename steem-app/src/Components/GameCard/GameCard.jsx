@@ -1,6 +1,6 @@
 import "./GameCard.css";
 
-function GameCard({ image, title, description, price }) {
+function GameCard({ image, title, description, price, onAddToCart }) {
   return (
     <div className="game-card">
       <img src={image} alt={title} />
@@ -10,7 +10,7 @@ function GameCard({ image, title, description, price }) {
       </div>
       <div className="game-card-footer">
         <span>${price}</span>
-        <button>Add to Cart</button>
+        <button onClick={onAddToCart}>Add to Cart</button>
       </div>
     </div>
   );

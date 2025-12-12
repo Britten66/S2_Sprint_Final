@@ -97,12 +97,10 @@ function LandingPage() {
     );
   };
 
-
-
   //0 === 0  = YES (loops to end) = 4
   // this is good practice because it keeps everything up to the most recent state increasing efficiency
-const [isPaused, setIsPaused] = useState(false);
-// 2. NEW EFFECT: Auto-scroll functionality
+  const [isPaused, setIsPaused] = useState(false);
+  // 2. NEW EFFECT: Auto-scroll functionality
   useEffect(() => {
     // If paused, don't set the interval
     if (isPaused) return;
@@ -137,7 +135,7 @@ const [isPaused, setIsPaused] = useState(false);
             <h2>Featured Games</h2>
             <div className="carousel">
               <button className="carousel-btn" onClick={prevSlide}>
-                	&#xf104;
+                &#xf104;
               </button>
 
               <div className="carousel-content">
@@ -151,7 +149,7 @@ const [isPaused, setIsPaused] = useState(false);
               </div>
 
               <button className="carousel-btn" onClick={nextSlide}>
-                	<i  class='fas'>&#xf105;</i>
+                <i className="fas">&#xf105;</i>
               </button>
             </div>
 

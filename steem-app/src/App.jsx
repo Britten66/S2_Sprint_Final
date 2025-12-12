@@ -12,6 +12,7 @@ import LoginPage from "./pages/Log-in-Page/login.jsx";
 import ShoppingCart from "./pages/Shopping-Page/ShoppingCart.jsx";
 import StorePage from "./pages/Store-Page/store.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
+import { CartProvider } from "./Components/context/CartContext.jsx";
 
 // global style sheet that we are tailoring to our page and using validation by utilizing ai
 //this helps us make clear design changes without throwing off the flow of a 2 person projeect
@@ -35,16 +36,18 @@ function App() {
   // v7_relativeSplatPath = changes how relative paths work (future-proofing)
 
   return (
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/ShoppingCart" element={<ShoppingCart />} />
-        <Route path="/store" element={<StorePage />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <CartProvider>
+      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/ShoppingCart" element={<ShoppingCart />} />
+          <Route path="/store" element={<StorePage />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </CartProvider>
   );
 }
 

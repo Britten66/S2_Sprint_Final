@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import GameCard from "../../Components/GameCard/GameCard.jsx";
+import { useCart } from "../../Components/context/CartContext.jsx";
 import "./store.css";
 
 function StorePage() {
+  const { handleAddToCart } = useCart();
   // SNOWFALL EFFECT - Creates falling snowflakes on store page
   useEffect(() => {
     function createSnowflake() {
@@ -43,8 +45,11 @@ function StorePage() {
             title="Bark Raiders"
             description="-New Release-"
             price={58.99}
+            onAddToCart={() =>
+              handleAddToCart({ id: "1", name: "Bark Raiders", price: 58.99 })
+            }
           />
-          
+
           <GameCard
             image="https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg"
             title="Baldur's Gate 3"
@@ -63,7 +68,7 @@ function StorePage() {
             image="https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg"
             title="Dota 2"
             description="The most-played game on Steam"
-            price={0.00}
+            price={0.0}
           />
         </div>
       </div>
