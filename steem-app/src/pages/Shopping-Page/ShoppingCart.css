@@ -35,10 +35,9 @@ body {
 
 .cart-right-container {
   min-width: 400px;
-  min-height: 168px;
+  min-height: 138px;
   background-color: #2f3439;
   justify-content: right;
-  margin-top: 1rem;
 }
 
 .cart-right-container .payment-form-btn {
