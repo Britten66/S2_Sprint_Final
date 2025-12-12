@@ -4,17 +4,41 @@ import "./ShoppingCart.css";
 const ShoppingCart = () => {
   const [cart, setCart] = useState(0);
   const [cartItems, setCartItems] = useState([]);
-  // setCartItems((prevItems) => {
-  //   const newItem = {
-      
-  //     ...productToAdd,
-  //     quantity: 1,
-  //   };
 
-  //   return [
-  //     /* What goes here to return a NEW array? */
-  //   ];
-  // });
+  const handleAddToCart = (productToAdd) => {
+    setCartItems((prevItems) => {
+      // Checking if the item already exists
+      const existingItemIndex = prevItems.findIndex(
+        (item) => item.id === productToAdd.id
+      );
+
+      if (existingItemIndex === -1) {
+        // new Item (Index is -1)
+        const newItem = {
+          ...productToAdd, // Copies id, name, price, etc.
+          quantity: 1,
+        };
+        // Return a new array with all previous items and the new item
+        return [...prevItems, newItem];
+      } else {
+        // Create a copy of the entire array
+        const updatedItems = [...prevItems];
+
+        // Create a copy of the specific existing item object
+        const existingItem = prevItems[existingItemIndex];
+        const updatedItem = {
+          ...existingItem,
+          quantity: existingItem.quantity + 1, // Update the quantity property
+        };
+
+        // Replace the old item in the copied array with the updated copy
+        updatedItems[existingItemIndex] = updatedItem;
+
+        // Return the brand new array
+        return updatedItems;
+      }
+    });
+  };
   const onClick = () => {
     setCart(cart + 1);
   };
