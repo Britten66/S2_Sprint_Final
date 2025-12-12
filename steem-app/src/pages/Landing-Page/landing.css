@@ -13,9 +13,10 @@
 }
 
 /* Main "Steem" title */
-.hero h1 {
-  font-size: 3.5rem;
-  margin-bottom: 0.5rem;
+.hero h2 {
+  font-size: 2.5rem;
+
+  margin-bottom: 4.5rem;
 }
 
 /* Tagline under title */
@@ -108,11 +109,13 @@
 /* GAME IMAGE - The big game header image */
 .game-image {
   width: 100%; /* Fills the available width */
-  max-width: 940px; /* Steam's typical header width */
+  max-width: 600px; /* Smaller than 940px */
   margin: 0 auto; /* Centers the image */
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6); /* Nice shadow effect */
   margin-bottom: 1rem; /* Space before game title */
+  position: relative;
+  z-index: 1000;
   display: block; /* Ensures proper centering */
 }
 
@@ -167,8 +170,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-
-  z-index: 2;
+ 
+ 
   pointer-events: none;
 
   background: none;

@@ -1,9 +1,8 @@
 // importing navigation between pages via router
-
 import { useNavigate } from "react-router-dom";
 
-//adding useState
-import { useState } from "react";
+//adding useState and useEffect
+import { useState, useEffect } from "react";
 import "./landing.css";
 
 // featured games here
@@ -16,7 +15,6 @@ const FEATURED_GAMES = [
       "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg",
     rating: 4.8,
   },
-
   {
     id: 2,
     name: "Baldur's Gate 3",
@@ -52,6 +50,35 @@ function LandingPage() {
   // current index set state = 0
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // SNOWFALL EFFECT - Creates falling snowflakes when component loads
+  useEffect(() => {
+    // CREATE SNOWFLAKE - Generates one falling snowflake
+    function createSnowflake() {
+      const snowflake = document.createElement("div");
+      snowflake.classList.add("snowflake");
+      snowflake.style.left = Math.random() * 100 + "vw";
+      snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+
+      const snowfallContainer = document.querySelector(".snowfall");
+      if (snowfallContainer) {
+        snowfallContainer.appendChild(snowflake);
+      }
+
+      // Remove snowflake after animation ends to prevent overflow
+      setTimeout(() => {
+        snowflake.remove();
+      }, 5000);
+    }
+
+    // Create new snowflake every 100ms
+    const snowInterval = setInterval(createSnowflake, 100);
+
+    // Cleanup when component unmounts
+    return () => {
+      clearInterval(snowInterval);
+    };
+  }, []);
+
   const nextSlide = () => {
     setCurrentIndex((prev) =>
       //if game length = last slide look back to 0 OR just add one " : < - this is sneaky "
@@ -69,20 +96,39 @@ function LandingPage() {
       prev === 0 ? FEATURED_GAMES.length - 1 : prev - 1
     );
   };
+
+
+
   //0 === 0  = YES (loops to end) = 4
   // this is good practice because it keeps everything up to the most recent state increasing efficiency
+const [isPaused, setIsPaused] = useState(false);
+// 2. NEW EFFECT: Auto-scroll functionality
+  useEffect(() => {
+    // If paused, don't set the interval
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 3000); // <-- Change this number to speed up/slow down (3000 = 3 secs)
+
+    // Clear interval on cleanup so we don't have multiple timers running
+    return () => clearInterval(interval);
+  }, [isPaused]);
 
   // inside this return statemetn is the content being displayed on the page
   // below will just contain the portion of the landing page with the intro and CTA to enter our store.
 
   return (
     <>
+      {/* PNG BACKGROUND SNOW - Animated background pattern */}
       <div className="snow"></div>
-      
+
+      {/* FALLING SNOWFLAKES - Individual falling flakes */}
+      <div className="snowfall"></div>
+
       <div className="landing-page">
         <section className="hero">
-          <h1>Steem</h1>
-          <p>Your ultimate gaming platform</p>
+          <h2>Welcome</h2>
           <button className="cta-button" onClick={() => navigate("/store")}>
             Browse Games
           </button>
@@ -91,7 +137,7 @@ function LandingPage() {
             <h2>Featured Games</h2>
             <div className="carousel">
               <button className="carousel-btn" onClick={prevSlide}>
-                ←
+                	&#xf104;
               </button>
 
               <div className="carousel-content">
@@ -105,7 +151,7 @@ function LandingPage() {
               </div>
 
               <button className="carousel-btn" onClick={nextSlide}>
-                →
+                	<i  class='fas'>&#xf105;</i>
               </button>
             </div>
 

@@ -1,0 +1,71 @@
+/* =========================================
+   SNOW BUILDUP - Accumulated snow that grows
+   - Starts at 0 height
+   - Grows via JavaScript over time
+========================================= */
+
+/* BUILDUP - Growing accumulated snow on footer */
+.buildup {
+  position: fixed;
+  bottom: 0; /* Starts at bottom */
+  left: 0;
+  width: 100%;
+  height: 0; /* Starts at 0, JavaScript grows it */
+
+  /* Gradient: solid white at bottom, fades to transparent at top */
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  z-index: 100; /* Above content */
+  pointer-events: none;
+  transition: height 0.2s linear; /* Smooth growth */
+}
+
+.shovel-btn {
+  position: static; /* Fixed to viewport */
+  right: 250px; /* 20px from right */
+  z-index: 101; /* Above snow buildup */
+
+  background: transparent; /* No background - just the image */
+  width: 80px; /* Even smaller */
+  height: 80px;
+  padding: 0; /* Remove default button padding */
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  /* Center the image */
+}
+
+/* SHOVEL IMAGE - Inside the button */
+.shovel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Keeps image proportions */
+  pointer-events: none; /* Clicks go to button */
+  filter: drop-shadow(
+    0 2px 4px rgba(0, 0, 0, 0.3)
+  ); /* Shadow so it stands out */
+}
+/* SHOVEL HOVER - Makes it bigger */
+.shovel-btn:hover:not(:disabled) {
+  transform: scale(1.2); /* Just bigger, no background change */
+  border: none;
+}
+
+/* SHOVEL ACTIVE - Click animation */
+.shovel-btn:active:not(:disabled) {
+  transform: scale(0.9); /* Shrinks when clicked */
+  border: none;
+}
+
+/* SHOVEL DISABLED - When clearing or no snow */
+.shovel-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  border: none;
+}
