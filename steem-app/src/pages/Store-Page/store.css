@@ -1,0 +1,62 @@
+/* =========================================
+   STORE PAGE - Main container
+   - Displays game cards in a grid
+   - Uses GameCard component
+========================================= */
+
+/* STORE PAGE CONTAINER - Main wrapper */
+.store-page {
+  padding: 6rem 2rem 2rem; /* Top padding leaves space for navbar */
+  max-width: 1400px; /* Don't get too wide on large screens */
+  margin: 0 auto; /* Center the container */
+  min-height: 100vh; /* Full viewport height minimum */
+  position: relative; /* Needed for z-index to work */
+  z-index: 10; /* Above snow (which is z-index 1 and 2) */
+}
+
+/* STORE PAGE HEADING - "Browse Games" title */
+.store-page h1 {
+  text-align: center;
+  font-family: cursive;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* GAMES GRID - Contains all GameCard components */
+.games-grid {
+  display: grid;
+  /* Cards are between 300px minimum and 460px maximum width */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 460px));
+  gap: 2rem; /* Space between cards */
+  justify-content: center; /* Center the grid horizontally */
+  padding: 1rem;
+}
+
+
+
+/* TABLETS - Medium screens */
+@media (max-width: 1024px) {
+  .games-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 400px));
+    gap: 1.5rem;
+  }
+}
+
+/* MOBILE - Small screens */
+@media (max-width: 768px) {
+  .store-page {
+    padding: 5rem 1rem 2rem; /* Less side padding */
+  }
+
+  .store-page h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .games-grid {
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 1.5rem;
+  }
+}

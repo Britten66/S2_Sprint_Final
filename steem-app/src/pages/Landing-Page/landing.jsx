@@ -67,7 +67,7 @@ function LandingPage() {
       // Remove snowflake after animation ends to prevent overflow
       setTimeout(() => {
         snowflake.remove();
-      }, 5000);
+      }, 10000);
     }
 
     // Create new snowflake every 100ms
