@@ -135,7 +135,7 @@ function LandingPage() {
             <h2>Featured Games</h2>
             <div className="carousel">
               <button className="carousel-btn" onClick={prevSlide}>
-                &#xf104;
+                &larr;
               </button>
 
               <div className="carousel-content">
@@ -149,7 +149,7 @@ function LandingPage() {
               </div>
 
               <button className="carousel-btn" onClick={nextSlide}>
-                <i className="fas">&#xf105;</i>
+                <i className="fas">&rarr;</i>
               </button>
             </div>
 
