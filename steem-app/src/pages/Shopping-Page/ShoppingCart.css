@@ -15,15 +15,6 @@ body {
   margin: 1rem;
 }
 
-.cart-btn {
-  background-color: #4d9ff2;
-  color: white;
-  justify-content: end;
-  position: fixed;
-  top: 70px;
-  right: 10px;
-}
-
 .cart-items-left-container {
   min-width: 800px;
   min-height: 40px;

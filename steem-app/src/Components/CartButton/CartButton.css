@@ -1,0 +1,8 @@
+.cart-btn {
+  background-color: #4d9ff2;
+  color: white;
+  justify-content: end;
+  position: fixed;
+  top: 70px;
+  right: 10px;
+}

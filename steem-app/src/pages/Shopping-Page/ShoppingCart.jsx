@@ -7,7 +7,7 @@ import "./ShoppingCart.css";
 const ShoppingCart = () => {
   const { cartItems, handleRemoveCart, handleAddToCart } = useCart();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const cart = cartItems.map((items) => (
     <div className="cart-item" key={items.id}>
@@ -34,9 +34,6 @@ const ShoppingCart = () => {
 
   return (
     <div className="main-cart-container">
-      <button className="cart-btn">
-        <FaCartPlus /> View Cart {cart.length === 0 ? 0 : `(${totalItems})`}
-      </button>
       <h2>Shopping Cart</h2>
       <div className="cart-items-left-container">
         {cart.length === 0 ? `Shopping cart is empty` : cart}
