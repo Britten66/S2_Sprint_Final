@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import "./landing.css";
 
 // featured games here
+
 // this is a hard coded section with images linked by https
 const FEATURED_GAMES = [
   {
