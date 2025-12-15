@@ -1,71 +1,110 @@
 /* =========================================
    SNOW BUILDUP - Accumulated snow that grows
-   - Starts at 0 height
-   - Grows via JavaScript over time
 ========================================= */
 
-/* BUILDUP - Growing accumulated snow on footer */
 .buildup {
   position: fixed;
-  bottom: 0; /* Starts at bottom */
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 0; /* Starts at 0, JavaScript grows it */
-
-  /* Gradient: solid white at bottom, fades to transparent at top */
+  height: 0;
   background: linear-gradient(
     to top,
     rgba(255, 255, 255, 0.95) 0%,
     rgba(255, 255, 255, 0.7) 50%,
     rgba(255, 255, 255, 0) 100%
   );
-
-  z-index: 100; /* Above content */
+  z-index: 100;
   pointer-events: none;
-  transition: height 0.2s linear; /* Smooth growth */
+  transition: height 0.2s linear;
 }
 
+/* SHOVEL BUTTON - Fixed to right side */
 .shovel-btn {
-  position: static; /* Fixed to viewport */
-  right: 250px; /* 20px from right */
-  z-index: 101; /* Above snow buildup */
-
-  background: transparent; /* No background - just the image */
-  width: 80px; /* Even smaller */
+  position: fixed; /* FIXED: was "static" */
+  bottom: 20px; /* ADD: vertical position */
+  right: 20px; /* FIXED: horizontal position */
+  z-index: 101;
+  
+  /* REMOVE ALL BORDERS */
+  background: transparent;
+  border: none !important; /* Force no border */
+  outline: none; /* Remove focus outline */
+  
+  width: 80px;
   height: 80px;
-  padding: 0; /* Remove default button padding */
-
+  padding: 0;
   cursor: pointer;
   transition: all 0.3s ease;
-
-  /* Center the image */
 }
 
-/* SHOVEL IMAGE - Inside the button */
+/* SHOVEL IMAGE */
 .shovel-img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Keeps image proportions */
-  pointer-events: none; /* Clicks go to button */
-  filter: drop-shadow(
-    0 2px 4px rgba(0, 0, 0, 0.3)
-  ); /* Shadow so it stands out */
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  border: none; /* Just in case */
 }
+
+/* TEXT - Positioned to the LEFT of shovel */
+.shovel-btn p {
+  font-family: cursive;
+  position: absolute;
+  
+  /* Position text to LEFT of shovel */
+  right: 90px; /* Places text left of the button */
+  top: 50%;
+  transform: translateY(-50%); /* Centers vertically */
+  
+  /* Style */
+  margin: 0;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  white-space: nowrap; /* Keeps text on one line */
+  
+  /* Hidden by default */
+  opacity: 0;
+  transform: translateY(-50%) translateX(10px); /* Slightly offset */
+  transition: all 0.3s ease;
+  
+  pointer-events: none; /* Clicks go through to button */
+}
+
+/* TEXT APPEARS ON HOVER */
+.shovel-btn:hover:not(:disabled) p {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0); /* Slides in */
+    color: black;
+}
+
 /* SHOVEL HOVER - Makes it bigger */
 .shovel-btn:hover:not(:disabled) {
-  transform: scale(1.2); /* Just bigger, no background change */
-  border: none;
+  transform: scale(1.2);
+}
+
+/* Remove border on hover too */
+.shovel-btn:hover:not(:disabled),
+.shovel-btn:focus {
+  border: none !important;
+  outline: none !important;
 }
 
 /* SHOVEL ACTIVE - Click animation */
 .shovel-btn:active:not(:disabled) {
-  transform: scale(0.9); /* Shrinks when clicked */
-  border: none;
+  transform: scale(0.9);
 }
 
 /* SHOVEL DISABLED - When clearing or no snow */
 .shovel-btn:disabled {
   opacity: 0.3;
   cursor: not-allowed;
-  border: none;
+}
+
+/* Hide text when disabled */
+.shovel-btn:disabled p {
+  display: none;
 }

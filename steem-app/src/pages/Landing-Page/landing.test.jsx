@@ -28,5 +28,13 @@ describe('landingPage', () => {
         const heading = screen.getByRole('heading', { name: /welcome/i });
         expect(heading).toBeInTheDocument();
     });
-
+test('displays Featured Games heading', () => {
+    render(
+        <BrowserRouter>
+            <LandingPage />
+        </BrowserRouter>
+    );
+    const heading = screen.getByRole('heading', { name: /featured games/i });
+    expect(heading).toBeInTheDocument();
+});
 });

@@ -50,13 +50,12 @@ function Footer() {
         className="shovel-btn"
         onClick={clearSnow}
         disabled={isClearing || buildupHeight === 0}
-        title="Clear the snow!"
-      >
+      > <strong><p>clear the snow</p></strong>
         <img
           src="/assets/Images/shovel.png"
           alt="Shovel"
           className="shovel-img"
-        />
+        /> 
       </button>
 
       {/* ACCUMULATED SNOW - Grows from bottom */}
