@@ -1,63 +1,50 @@
 import { useState } from "react";
 import { FaCartPlus } from "react-icons/fa";
+import { useCart } from "../../Components/Context/CartContext";
+import { useNavigate } from "react-router-dom";
 import "./ShoppingCart.css";
+
 const ShoppingCart = () => {
-  const [cart, setCart] = useState(0);
-  const [cartItems, setCartItems] = useState([]);
+  const { cartItems, handleRemoveCart, handleAddToCart } = useCart();
 
-  const handleAddToCart = (productToAdd) => {
-    setCartItems((prevItems) => {
-      // Checking if the item already exists
-      const existingItemIndex = prevItems.findIndex(
-        (item) => item.id === productToAdd.id
-      );
+  // const navigate = useNavigate();
 
-      if (existingItemIndex === -1) {
-        // new Item (Index is -1)
-        const newItem = {
-          ...productToAdd, // Copies id, name, price, etc.
-          quantity: 1,
-        };
-        // Return a new array with all previous items and the new item
-        return [...prevItems, newItem];
-      } else {
-        // Create a copy of the entire array
-        const updatedItems = [...prevItems];
+  const cart = cartItems.map((items) => (
+    <div className="cart-item" key={items.id}>
+      <img src={items.image} alt={items.title} />
+      <h3>{items.title}</h3>
+      <p>C$ {items.price}</p>
+      <p>{items.description}</p>
+      <button onClick={() => handleAddToCart(items)}>+</button>
+      <p>{items.quantity}</p>
+      <button onClick={() => handleRemoveCart(items)}>-</button>
+    </div>
+  ));
 
-        // Create a copy of the specific existing item object
-        const existingItem = prevItems[existingItemIndex];
-        const updatedItem = {
-          ...existingItem,
-          quantity: existingItem.quantity + 1, // Update the quantity property
-        };
+  // Variable to add total price of items.
+  const totalPrice = cartItems.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
+  // console.log("Current car Items:", cartItems);
 
-        // Replace the old item in the copied array with the updated copy
-        updatedItems[existingItemIndex] = updatedItem;
-
-        // Return the brand new array
-        return updatedItems;
-      }
-    });
-  };
-  const onClick = () => {
-    setCart(cart + 1);
-  };
+  // Variable to add total quantity of items.
+  const totalItems = cartItems.reduce((total, item) => {
+    return total + item.quantity;
+  }, 0);
 
   return (
     <div className="main-cart-container">
-      <button className="cart-btn" onClick={onClick}>
-        <FaCartPlus /> Cart {cart}
+      <button className="cart-btn">
+        <FaCartPlus /> View Cart {cart.length === 0 ? 0 : `(${totalItems})`}
       </button>
       <h2>Shopping Cart</h2>
       <div className="cart-items-left-container">
-        {cart === 0
-          ? `Shopping cart is empty`
-          : `You have ${cart} item(s) in your cart`}
+        {cart.length === 0 ? `Shopping cart is empty` : cart}
       </div>
       <div className="cart-right-container">
-        <p>Estimated total</p> <p>C$ {cart}</p>
+        <p>Estimated total</p> <p>C$ {totalPrice.toFixed(2)}</p>
         <p>Sales tax will be calculated during checkout</p>
-        <button className="payment-form-btn">Countinue to Payment</button>
+        <button className="payment-form-btn">Continue to Payment</button>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import GameCard from "../../Components/GameCard/GameCard.jsx";
-import { useCart } from "../../Components/context/CartContext.jsx";
+import { useCart } from "../../Components/Context/CartContext.jsx";
 import "./store.css";
 
 function StorePage() {
@@ -46,7 +46,13 @@ function StorePage() {
             description="-New Release-"
             price={58.99}
             onAddToCart={() =>
-              handleAddToCart({ id: "1", name: "Bark Raiders", price: 58.99 })
+              handleAddToCart({
+                id: "1",
+                image: "/assets/Images/barkraider.png",
+                title: "Bark Raiders",
+                description: "-New Release-",
+                price: 58.99,
+              })
             }
           />
 
@@ -55,6 +61,17 @@ function StorePage() {
             title="Baldur's Gate 3"
             description="Gather your party and return to the Forgotten Realms"
             price={59.99}
+            onAddToCart={() =>
+              handleAddToCart({
+                id: "2",
+                image:
+                  "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg",
+                title: "Baldur's Gate 3",
+                description:
+                  "Gather your party and return to the Forgotten Realms",
+                price: 59.99,
+              })
+            }
           />
 
           <GameCard
@@ -62,6 +79,17 @@ function StorePage() {
             title="Elden Ring"
             description="An epic action RPG adventure in a vast open world"
             price={59.99}
+            onAddToCart={() =>
+              handleAddToCart({
+                id: "3",
+                image:
+                  "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg",
+                title: "Elden Ring",
+                description:
+                  "An epic action RPG adventure in a vast open world",
+                price: 59.99,
+              })
+            }
           />
 
           <GameCard
@@ -69,6 +97,16 @@ function StorePage() {
             title="Dota 2"
             description="The most-played game on Steam"
             price={0.0}
+            onAddToCart={() =>
+              handleAddToCart({
+                id: "4",
+                image:
+                  "https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg",
+                title: "Dota 2",
+                description: "The most-played game on Steam",
+                price: 0.0,
+              })
+            }
           />
         </div>
       </div>

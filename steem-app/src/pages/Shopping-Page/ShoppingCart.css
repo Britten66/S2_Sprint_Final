@@ -26,11 +26,11 @@ body {
 
 .cart-items-left-container {
   min-width: 800px;
-  min-height: 138px;
+  min-height: 40px;
   background-color: #2f3439;
   justify-content: left;
   margin: 1rem;
-  /* opacity: 50%; */
+  /* opacity: 30%; */
 }
 
 .cart-right-container {
@@ -45,4 +45,14 @@ body {
   color: white;
   padding: 8px 80px 8px 80px;
   margin-top: 20px;
+}
+
+.cart-item {
+  display: flex;
+}
+
+.cart-item img {
+  width: 180px;
+  height: 150px;
+  padding: 4px;
 }
