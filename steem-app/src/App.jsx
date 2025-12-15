@@ -12,7 +12,7 @@ import LoginPage from "./pages/Log-in-Page/login.jsx";
 import ShoppingCart from "./pages/Shopping-Page/ShoppingCart.jsx";
 import StorePage from "./pages/Store-Page/store.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
-import { CartProvider } from "./Components/context/CartContext.jsx";
+import { CartProvider } from "./Components/Context/CartContext.jsx";
 
 // global style sheet that we are tailoring to our page and using validation by utilizing ai
 //this helps us make clear design changes without throwing off the flow of a 2 person projeect
