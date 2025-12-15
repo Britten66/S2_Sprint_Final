@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import GameCard from "../../Components/GameCard/GameCard.jsx";
-import { useCart } from "../../Components/context/CartContext.jsx";
+import { useCart } from "../../Components/Context/CartContext.jsx";
 import "./store.css";
 
 function StorePage() {
