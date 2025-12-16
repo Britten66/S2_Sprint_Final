@@ -41,7 +41,7 @@ const ShoppingCart = () => {
       <div className="cart-right-container">
         <p>Estimated total</p> <p>C$ {totalPrice.toFixed(2)}</p>
         <p>Sales tax will be calculated during checkout</p>
-        <button className="conbtn">Confirm Purchase</button>
+        <button className="confirm-pur-btn">Confirm Purchase</button>
       </div>
     </div>
   );
