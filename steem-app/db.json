@@ -1,38 +1,67 @@
 {
-  "user": [
+  "users": [
     {
-      "id": "2e43",
-      "firstname": "Rusty",
-      "lastname": "Shakleford",
-      "streetaddress": "123 fake street",
-      "pobox": "",
-      "country": "canada",
-      "city": "Deep bite",
-      "province": "Newfoundland",
-      "postalcode": "A0B0A1",
-      "phonenumber": "7094657689",
-      "paytype": "visa",
-      "cardnumber": "1234456778986542",
-      "expireday": "10",
-      "exprieyear": "28",
-      "cardcode": "333"
+      "id": 1,
+      "username": "user1",
+      "email": "user1@email.com",
+      "password": "password",
+      "wallet": 100.0
     },
     {
-      "id": "7n28",
-      "firstname": "Bill",
-      "lastname": "Hicks",
-      "streetaddress": "125 high street",
-      "pobox": "",
-      "country": "canada",
-      "city": "Addytown",
-      "province": "Newfoundland",
-      "postalcode": "A0B9B7",
-      "phonenumber": "7097270652",
-      "paytype": "visa",
-      "cardnumber": "7895643245678524",
-      "expireday": "23",
-      "exprieyear": "27",
-      "cardcode": "975"
+      "id": 2,
+      "username": "user2",
+      "email": "user2@email.com",
+      "password": "password",
+      "wallet": 200.0
+    },
+    {
+      "id": 3,
+      "username": "user3",
+      "email": "user3@email.com",
+      "password": "password",
+      "wallet": 1000.0
+    }
+  ],
+  "games": [
+    {
+      "id": 1,
+      "name": "Elden Ring",
+      "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg",
+      "description": "An epic action RPG adventure in a vast open world",
+      "price": 59.99,
+      "rating": 4.8
+    },
+    {
+      "id": 2,
+      "name": "Baldur's Gate 3",
+      "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg",
+      "description": "Gather your party and return to the Forgotten Realms",
+      "price": 59.99,
+      "rating": 4.9
+    },
+    {
+      "id": 3,
+      "name": "Dota 2",
+      "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg",
+      "description": "The most-played game on Steam",
+      "price": 0.0,
+      "rating": 4.7
+    },
+    {
+      "id": 4,
+      "name": "Hogwarts Legacy",
+      "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/header.jpg",
+      "description": "Experience Hogwarts in the 1800s",
+      "price": 59.99,
+      "rating": 4.6
+    },
+    {
+      "id": 5,
+      "name": "Starfield",
+      "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1716740/header.jpg",
+      "description": "The next generation RPG from Bethesda",
+      "price": 69.99,
+      "rating": 4.2
     }
   ]
 }

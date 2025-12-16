@@ -9,7 +9,7 @@
     "test": "vitest",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "json-server db.json --port 5000"
+    "server": "json-server --watch db.json --port 3001"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
@@ -28,7 +28,6 @@
     "vitest": "^4.0.15"
   },
   "dependencies": {
-    "server": "json-server --watch db.json --port 3001",
     "json-server": "^1.0.0-beta.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -36,4 +35,3 @@
     "react-router-dom": "^6.30.2"
   }
 }
-
