@@ -1,4 +1,10 @@
 {
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "vitest",
+    "server": "json-server --watch db.json --port 3001"
+  },
   "dependencies": {
     "react-router-dom": "^7.10.1"
   }
