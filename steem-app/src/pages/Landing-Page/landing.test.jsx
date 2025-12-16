@@ -37,4 +37,18 @@ test('displays Featured Games heading', () => {
     const heading = screen.getByRole('heading', { name: /featured games/i });
     expect(heading).toBeInTheDocument();
 });
+ test('displays Featured Games heading', () => {
+        // RENDER - Put component on fake page
+        render(
+            <BrowserRouter>
+                <LandingPage />
+            </BrowserRouter>
+        );
+        
+        // /featured games/i = regex pattern, case insensitive
+        const heading = screen.getByRole('heading', { name: /featured games/i });
+        
+        // CHECK HERE !! -- This Was wrong earlier on the last test - Verify the heading is in the DOM
+        expect(heading).toBeInTheDocument();
+    });
 });
