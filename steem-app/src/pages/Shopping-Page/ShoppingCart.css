@@ -21,7 +21,8 @@ body {
   background-color: #2f3439;
   justify-content: left;
   margin: 1rem;
-  /* opacity: 30%; */
+  background: linear-gradient(135deg, #1b2838d4 0%, #2a475e50 100%);
+  border-radius: 8px;
 }
 
 .cart-right-container {
@@ -29,6 +30,8 @@ body {
   min-height: 138px;
   background-color: #2f3439;
   justify-content: right;
+  background: linear-gradient(135deg, #1b2838d4 0%, #2a475e50 100%);
+  border-radius: 8px;
 }
 
 .cart-right-container .payment-form-btn {
@@ -40,10 +43,32 @@ body {
 
 .cart-item {
   display: flex;
+  margin-bottom: 10px;
 }
 
 .cart-item img {
   width: 180px;
   height: 150px;
   padding: 4px;
+}
+
+.item-info {
+  display: flex;
+}
+
+.add-btn {
+  margin: auto;
+  color: white;
+  background: linear-gradient(135deg, #1b2838d4 0%, #2a475e50 100%);
+}
+
+.remove-btn {
+  margin: auto;
+  color: white;
+  background: linear-gradient(135deg, #1b2838d4 0%, #2a475e50 100%);
+}
+
+.qty-input {
+  margin: auto;
+  max-width: 20px;
 }
