@@ -12,7 +12,24 @@ export const CartProvider = ({ children }) => {
     if (savedWallet) {
       setWallet(parseFloat(savedWallet));
     }
-  }, []);
+
+
+  // here im adding an event listener
+  const handleStorageChange = () => {
+    const newWallet = localStorage.getItem("wallet");
+    if(newWallet){
+      setWallet(parseFloat(newWallet));
+    }
+  };
+// Look over these ***
+  window .addEventListener('storage', handleStorageChange);
+  window.addEventListener('walletUpdate', handleStorageChange);
+  //listeners for unmounting >>> ???? ******* 
+ return () => {
+    window.removeEventListener('storage', handleStorageChange);
+    window.removeEventListener('walletUpdate', handleStorageChange);
+  };
+}, []);
 
   // AddToCart function
   const handleAddToCart = (productToAdd) => {

@@ -1,5 +1,5 @@
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css"; // Importing the CSS file you just created
 
 const LoginPage = () => {
@@ -7,11 +7,9 @@ const LoginPage = () => {
   const [userPass, setUserPass] = useState("");
   const [userEmailErr, setUserEmailErr] = useState("");
   const [userPassErr, setUserPassErr] = useState("");
-const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-
-
-// added async to this below
+  // added async to this below
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,12 +19,11 @@ const navigate = useNavigate();
       console.log("Error e-mail cannot be empty");
     }
     console.log("Login Attempt:", { userEmail, userPass });
-  
 
     // This checks login credentials and saves wallet info
     // ========================================
-    
-    // Validate password 
+
+    // Validate password
     if (userPass === "") {
       setUserPassErr("Please enter your password");
       return;
@@ -38,36 +35,38 @@ const navigate = useNavigate();
 
     // Fetch users from JSON Server to check credentials
     try {
-      const response = await fetch('http://localhost:3001/users');
+      const response = await fetch("http://localhost:3001/users");
       const users = await response.json();
-      
+
       // Find user with matching email and password
       const user = users.find(
-        u => u.email === userEmail && u.password === userPass
+        (u) => u.email === userEmail && u.password === userPass
       );
-      
+
       // If we found a matching user
       if (user) {
         // SAVE WALLET INFO to localStorage so cart can use it
-        localStorage.setItem('userId', user.id); // Need this to update wallet later
-        localStorage.setItem('username', user.username); // Display in navbar
-        localStorage.setItem('wallet', user.wallet); // Starting money amount
-        localStorage.setItem('isLoggedIn', 'true'); // Track if logged in
-        
-        console.log('Login successful:', user.username);
-        
-        // navstore page 
-        navigate('/store');
+        localStorage.setItem("userId", user.id); // Need this to update wallet later
+        localStorage.setItem("username", user.username); // Display in navbar
+        localStorage.setItem("wallet", user.wallet); // Starting money amount
+        localStorage.setItem("isLoggedIn", "true"); // Track if logged in
+
+        // added this -- updated fresh
+        window.dispatchEvent(new Event("walletUpdate"));
+        console.log("Login successful:", user.username);
+
+        // navstore page
+        navigate("/store");
       } else {
         // if failing here
         setUserEmailErr("Invalid email or password");
       }
     } catch (err) {
       // Error handler
-      console.error('Login error:', err);
+      console.error("Login error:", err);
       setUserEmailErr("Login failed. Check JSON Server is running.");
     }
-  }
+  };
   return (
     <div className="login-page-wrapper">
       <div className="login-container">
