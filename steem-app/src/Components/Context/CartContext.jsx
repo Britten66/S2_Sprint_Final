@@ -6,30 +6,57 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [wallet, setWallet] = useState(0);
 
-  // Load wallet from localStorage
+  // Load wallet from localStorage and set up listeners
   useEffect(() => {
-    const savedWallet = localStorage.getItem("wallet"); 
+    // 1. Initial Load
+    const savedWallet = localStorage.getItem("wallet");
     if (savedWallet) {
       setWallet(parseFloat(savedWallet));
     }
 
+    // 2. Define the handler inside useEffect to keep it scoped
+    const handleStorageChange = () => {
+      const newWallet = localStorage.getItem("wallet");
+      if (newWallet) {
+        setWallet(parseFloat(newWallet));
+      }
+    };
 
-  // here im adding an event listener
-  const handleStorageChange = () => {
-    const newWallet = localStorage.getItem("wallet");
-    if(newWallet){
-      setWallet(parseFloat(newWallet));
+    // 3. Add Listeners
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('walletUpdate', handleStorageChange);
+
+    // 4. CLEANUP: This runs when the component unmounts
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('walletUpdate', handleStorageChange);
+    };
+  }, []); // Empty dependency array ensures this only runs once
+
+  // Reset Wallet function
+  const resetWallet = async () => {
+    const userId = localStorage.getItem("userId");
+    const resetAmount = 200; // Fixed amount
+
+    try {
+      await fetch(`http://localhost:3001/users/${userId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ wallet: resetAmount }) 
+      });
+
+      setWallet(resetAmount); 
+      localStorage.setItem("wallet", resetAmount); 
+
+      // Trigger custom event so other components know to update
+      window.dispatchEvent(new Event('walletUpdate'));
+
+      return { success: true, message: "Wallet reset to $200!" };
+    } catch (err) {
+      console.error("Reset failed:", err);
+      return { success: false, message: "Reset failed" };
     }
   };
-// Look over these ***
-  window .addEventListener('storage', handleStorageChange);
-  window.addEventListener('walletUpdate', handleStorageChange);
-  //listeners for unmounting >>> ???? ******* 
- return () => {
-    window.removeEventListener('storage', handleStorageChange);
-    window.removeEventListener('walletUpdate', handleStorageChange);
-  };
-}, []);
 
   // AddToCart function
   const handleAddToCart = (productToAdd) => {
@@ -106,7 +133,14 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cartItems, wallet, handleAddToCart, handleRemoveCart, checkout }}
+      value={{ 
+        cartItems, 
+        wallet, 
+        handleAddToCart, 
+        handleRemoveCart, 
+        checkout,
+        resetWallet  // Add resetWallet to the context value
+      }}
     >
       {children}
     </CartContext.Provider>

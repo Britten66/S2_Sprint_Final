@@ -5,7 +5,7 @@
       "username": "user1",
       "email": "user1@email.com",
       "password": "password",
-      "wallet": 100
+      "wallet": 80.02
     },
     {
       "id": "2",
@@ -19,7 +19,7 @@
       "username": "user3",
       "email": "user3@email.com",
       "password": "password",
-      "wallet": 882.02
+      "wallet": 703.05
     }
   ],
   "games": [

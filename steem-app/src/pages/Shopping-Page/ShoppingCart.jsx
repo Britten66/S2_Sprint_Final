@@ -4,20 +4,39 @@ import { useNavigate } from "react-router-dom";
 import "./ShoppingCart.css";
 
 const ShoppingCart = () => {
-  const { cartItems, handleRemoveCart, handleAddToCart, checkout, wallet } = useCart();
+  const {
+    cartItems,
+    handleRemoveCart,
+    handleAddToCart,
+    checkout,
+    wallet,
+    resetWallet,
+  } = useCart();
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   const handleCheckout = async () => {
     const result = await checkout();
-    
+
     if (result.success) {
       setMessage("Purchase successful.");
-      setTimeout(() => navigate('/store'), 2000);
+      setTimeout(() => navigate("/store"), 2000);
     } else {
       setMessage(`${result.message}`);
     }
-    
+
+    setTimeout(() => setMessage(""), 3000);
+  };
+
+  const handleResetWallet = async () => {
+    const result = await resetWallet();
+
+    if (result.success) {
+      setMessage("Wallet reset to $200!");
+    } else {
+      setMessage(result.message);
+    }
+
     setTimeout(() => setMessage(""), 3000);
   };
 
@@ -75,9 +94,21 @@ const ShoppingCart = () => {
 
       <div className="main-cart-container">
         <h2>Shopping Cart</h2>
-        
+
         {message && (
-          <div style={{gridColumn: 'span 2', textAlign: 'center', padding: '10px', background: message.includes('successful') ? '#4caf50' : '#f44336', color: 'white', borderRadius: '8px'}}>
+          <div
+            style={{
+              gridColumn: "span 2",
+              textAlign: "center",
+              padding: "10px",
+              background:
+                message.includes("successful") || message.includes("reset")
+                  ? "#4caf50"
+                  : "#f44336",
+              color: "white",
+              borderRadius: "8px",
+            }}
+          >
             {message}
           </div>
         )}
@@ -85,18 +116,27 @@ const ShoppingCart = () => {
         <div className="cart-items-left-container">
           {cart.length === 0 ? `Shopping cart is empty` : cart}
         </div>
-        
+
         <div className="cart-right-container">
-          <p>Wallet: C$ {wallet.toFixed(2)}</p>
+          <div className="wallet-header">
+            <p>Wallet: C$ {wallet.toFixed(2)}</p>
+            <button
+              className="reset-wallet-btn"
+              onClick={handleResetWallet}
+              title="Reset Wallet to $200"
+            >
+              Reset Wallet
+            </button>
+          </div>
           <p>Total: C$ {totalPrice.toFixed(2)}</p>
           <p>Remaining: C$ {(wallet - totalPrice).toFixed(2)}</p>
           <p>Sales tax will be calculated during checkout</p>
-          <button 
+          <button
             className="confirm-pur-btn"
             onClick={handleCheckout}
             disabled={totalPrice > wallet}
           >
-            {totalPrice > wallet ? 'Insufficient Funds' : 'Confirm Purchase'}
+            {totalPrice > wallet ? "Insufficient Funds" : "Confirm Purchase"}
           </button>
         </div>
       </div>
