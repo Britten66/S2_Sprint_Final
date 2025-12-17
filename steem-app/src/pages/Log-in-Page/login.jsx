@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Login.css"; // Importing the CSS file you just created
+import "./Login.css";
 
 const LoginPage = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -9,10 +9,29 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Sets error to blank so I dosent keep displaying.
+    setUserEmailErr("");
+    setUserPassErr("");
+
+    // Check if Email input is blank.
     if (userEmail === "") {
-      setUserEmailErr("Please enter your E-Mail");
+      setUserEmailErr("Please enter your E-mail");
       console.log("Error e-mail cannot be empty");
+      return;
     }
+    // Check if Email input is a valided Email.
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(userEmail)) {
+      setUserEmailErr("Please enter a valid email address");
+      return;
+    }
+    // Check if the password input is empty.
+    if (userPass === "") {
+      setUserPassErr("Please enter your password");
+      console.log("Error password canot be empty");
+      return;
+    }
+
     console.log("Login Attempt:", { userEmail, userPass });
   };
 
@@ -46,7 +65,9 @@ const LoginPage = () => {
                 <label htmlFor="email">Email</label>
                 <span className="input-line"></span>
               </div>
-              <span className="error-message" id="emailError"></span>
+              <span className={`error-message ${userEmailErr ? "show" : ""}`}>
+                {userEmailErr}
+              </span>
             </div>
 
             <div className="form-group">
@@ -71,7 +92,9 @@ const LoginPage = () => {
                 </button>
                 <span className="input-line"></span>
               </div>
-              <span className="error-message" id="passwordError"></span>
+              <span className={`error-message ${userPassErr ? "show" : ""}`}>
+                {userPassErr}
+              </span>
             </div>
 
             <div className="form-options">
