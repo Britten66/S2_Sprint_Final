@@ -1,0 +1,153 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.main-cart-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+  justify-items: start;
+}
+
+.main-cart-container h2 {
+  grid-column: span 2;
+  margin: 1rem;
+}
+
+.cart-items-left-container {
+  min-width: 800px;
+  min-height: 40px;
+  background-color: #2f3439;
+  justify-content: left;
+  margin: 1rem;
+  background: linear-gradient(135deg, #1b2838d4 0%, #2a475e50 100%);
+  border-radius: 8px;
+}
+
+.cart-right-container {
+  min-width: 400px;
+  min-height: 138px;
+  background-color: #2f3439;
+  justify-content: right;
+  background: linear-gradient(135deg, #1b2838d4 0%, #2a475e50 100%);
+  border-radius: 8px;
+}
+
+.cart-right-container .confirm-pur-btn {
+  background-color: #66c0f4;
+  color: #1b2838;
+  padding: 8px 80px 8px 80px;
+  margin-top: 20px;
+}
+
+/* Container for the whole row */
+.cart-item {
+  display: flex;
+  align-items: center; /* Centers items vertically */
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle separator line */
+  background-color: rgba(0, 0, 0, 0.2); /* Darker background for the item row */
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+/* Image styling */
+.cart-item img {
+  width: 120px; /* Fixed width so they align */
+  height: 70px; /* Fixed height */
+  object-fit: cover; /* Prevents image stretching/distortion */
+  border-radius: 4px;
+  margin-right: 20px;
+}
+
+/* 1. Middle Section: Takes up all extra space */
+.item-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 20px;
+  text-align: left;
+}
+
+.item-details h3 {
+  margin: 0 0 5px 0;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.item-details p {
+  margin: 0;
+  color: #a3b3c5;
+  font-size: 0.9rem;
+}
+
+/* Price Section */
+.item-price {
+  font-weight: bold;
+  color: #66c0f4; /* Steam blue color */
+  margin-right: 30px;
+  min-width: 80px; /* Ensures price doesn't jump around */
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between buttons */
+}
+
+.qty-input {
+  width: 30px;
+  text-align: center;
+  background: #171a21;
+  border: 1px solid #4b5563;
+  color: white;
+  border-radius: 2px;
+  padding: 5px;
+}
+
+/* Button Refinements */
+.add-btn,
+.remove-btn {
+  padding: 5px 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 2px;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.add-btn:hover {
+  background: #66c0f4;
+  color: black;
+}
+
+.remove-btn:hover {
+  background: #ff4d4d;
+  color: white;
+}
+
+/* =========================================
+   ANIMATED PNG FLAKES
+   - Uses 3 layered PNGs
+========================================= */
+.snow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+
+  background: none;
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/191814/flake1.png"),
+    url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/191814/flake2.png"),
+    url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/191814/flake3.png");
+  background-repeat: repeat;
+  background-size: 600px 600px;
+
+  /* Single standard animation, no vendor prefixes needed now */
+  animation: snow 20s linear infinite;
+}
