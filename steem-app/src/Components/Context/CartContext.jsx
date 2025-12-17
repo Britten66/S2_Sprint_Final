@@ -1,81 +1,101 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
-// Create the context.
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  // useState to hold list of items.
   const [cartItems, setCartItems] = useState([]);
+  const [wallet, setWallet] = useState(0);
 
-  // AddToCart function.
+  // Load wallet from localStorage
+  useEffect(() => {
+    const savedWallet = localStorage.getItem("wallet"); 
+    if (savedWallet) {
+      setWallet(parseFloat(savedWallet));
+    }
+  }, []);
+
+  // AddToCart function
   const handleAddToCart = (productToAdd) => {
     console.log("Adding item:", productToAdd);
     setCartItems((prevItems) => {
-      // Checking if the item already exists.
       const existingItemIndex = prevItems.findIndex(
         (item) => item.id === productToAdd.id
       );
 
       if (existingItemIndex === -1) {
-        // new Item (Index is -1).
         const newItem = {
-          ...productToAdd, // Copies id, name, price, etc.
+          ...productToAdd,
           quantity: 1,
         };
-        // Return a new array with all previous items and the new item.
         return [...prevItems, newItem];
       } else {
-        // Create a copy of the entire array.
         const updatedItems = [...prevItems];
-
-        // Create a copy of the specific existing item object.
         const existingItem = prevItems[existingItemIndex];
         const updatedItem = {
           ...existingItem,
-          quantity: existingItem.quantity + 1, // Update the quantity property.
+          quantity: existingItem.quantity + 1,
         };
-
-        // Replace the old item in the copied array with the updated copy.
         updatedItems[existingItemIndex] = updatedItem;
-
-        // Return the brand new array
         return updatedItems;
       }
     });
   };
 
-  // RemoveCart function.
+  // RemoveCart function
   const handleRemoveCart = (product) => {
-    // Checking if product is added.
     if (product.quantity === 1) {
-      // Checking if item.id matches product.id
       setCartItems(cartItems.filter((item) => item.id !== product.id));
     } else {
-      // If id matches subtract 1 from the quantity.
       setCartItems(
         cartItems.map((item) =>
           item.id === product.id
-            ? {
-                ...item,
-                quantity: item.quantity - 1,
-              }
+            ? { ...item, quantity: item.quantity - 1 }
             : item
         )
       );
     }
   };
 
-  // Returning the Provider with the value object.
+  // Checkout function 
+  const checkout = async () => {
+    const total = cartItems.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+    const userId = localStorage.getItem("userId");
+
+    if (total > wallet) {
+      return { success: false, message: "Insufficient funds" };
+    }
+
+    try {
+      const newWallet = wallet - total;
+
+      await fetch(`http://localhost:3001/users/${userId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ wallet: newWallet }),
+      });
+
+      setWallet(newWallet);
+      localStorage.setItem("wallet", newWallet);
+      setCartItems([]);
+
+      return { success: true, message: "Purchase successful!" };
+    } catch (err) {
+      return { success: false, message: "Purchase failed" };
+    }
+  };
+
   return (
     <CartContext.Provider
-      value={{ cartItems, handleAddToCart, handleRemoveCart }}
+      value={{ cartItems, wallet, handleAddToCart, handleRemoveCart, checkout }}
     >
       {children}
     </CartContext.Provider>
   );
 };
 
-// Custom Hook for better access
 export const useCart = () => {
   return useContext(CartContext);
 };
