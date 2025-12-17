@@ -35,8 +35,8 @@ body {
 }
 
 .cart-right-container .confirm-pur-btn {
-  background-color: #4d9ff2;
-  color: white;
+  background-color: #66c0f4;
+  color: #1b2838;
   padding: 8px 80px 8px 80px;
   margin-top: 20px;
 }
@@ -71,4 +71,28 @@ body {
 .qty-input {
   margin: auto;
   max-width: 20px;
+}
+
+/* =========================================
+   ANIMATED PNG FLAKES
+   - Uses 3 layered PNGs
+========================================= */
+.snow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+
+  background: none;
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/191814/flake1.png"),
+    url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/191814/flake2.png"),
+    url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/191814/flake3.png");
+  background-repeat: repeat;
+  background-size: 600px 600px;
+
+  /* Single standard animation, no vendor prefixes needed now */
+  animation: snow 20s linear infinite;
 }

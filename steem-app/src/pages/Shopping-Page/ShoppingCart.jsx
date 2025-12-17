@@ -1,29 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "../../Components/Context/CartContext";
 import { useNavigate } from "react-router-dom";
 import "./ShoppingCart.css";
 
 const ShoppingCart = () => {
   const { cartItems, handleRemoveCart, handleAddToCart, checkout, wallet } = useCart();
- //adding message 
- const [message,setMessage] = useState()
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
+  const handleCheckout = async () => {
+    const result = await checkout();
+    
+    if (result.success) {
+      setMessage("Purchase successful.");
+      setTimeout(() => navigate('/store'), 2000);
+    } else {
+      setMessage(`${result.message}`);
+    }
+    
+    setTimeout(() => setMessage(""), 3000);
+  };
 
-const handleCheckout = async () => {
-  const result = await checkout();
-  
-  if (result.success) {
-    setMessage(" Purchase successful.");
-    setTimeout(() => navigate('/store'), 2000);
-  } else {
-    setMessage(`${result.message}`);
-  }
-  
-  setTimeout(() => setMessage(""), 3000);
-};
+  // SNOWFALL EFFECT
+  useEffect(() => {
+    function createSnowflake() {
+      const snowflake = document.createElement("div");
+      snowflake.classList.add("snowflake");
+      snowflake.style.left = Math.random() * 100 + "vw";
+      snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
 
+      const snowfallContainer = document.querySelector(".snowfall");
+      if (snowfallContainer) {
+        snowfallContainer.appendChild(snowflake);
+      }
 
+      setTimeout(() => {
+        snowflake.remove();
+      }, 10000);
+    }
+
+    const snowInterval = setInterval(createSnowflake, 100);
+
+    return () => {
+      clearInterval(snowInterval);
+    };
+  }, []);
 
   const cart = cartItems.map((items) => (
     <div className="cart-item" key={items.id}>
@@ -43,37 +64,43 @@ const handleCheckout = async () => {
     </div>
   ));
 
-  // Variable to add total price of items.
   const totalPrice = cartItems.reduce((total, item) => {
     return total + item.price * item.quantity;
   }, 0);
-  // console.log("Current car Items:", cartItems);
 
   return (
-    <div className="main-cart-container">
-      <h2>Shopping Cart</h2>
-      {message && (
-  <div style={{gridColumn: 'span 2', textAlign: 'center', padding: '10px', background: message.includes('✅') ? '#4caf50' : '#f44336', color: 'white', borderRadius: '8px'}}>
-    {message}
-  </div>
-)}
-      <div className="cart-items-left-container">
-        {cart.length === 0 ? `Shopping cart is empty` : cart}
+    <>
+      <div className="snow"></div>
+      <div className="snowfall"></div>
+
+      <div className="main-cart-container">
+        <h2>Shopping Cart</h2>
+        
+        {message && (
+          <div style={{gridColumn: 'span 2', textAlign: 'center', padding: '10px', background: message.includes('successful') ? '#4caf50' : '#f44336', color: 'white', borderRadius: '8px'}}>
+            {message}
+          </div>
+        )}
+
+        <div className="cart-items-left-container">
+          {cart.length === 0 ? `Shopping cart is empty` : cart}
+        </div>
+        
+        <div className="cart-right-container">
+          <p>Wallet: C$ {wallet.toFixed(2)}</p>
+          <p>Total: C$ {totalPrice.toFixed(2)}</p>
+          <p>Remaining: C$ {(wallet - totalPrice).toFixed(2)}</p>
+          <p>Sales tax will be calculated during checkout</p>
+          <button 
+            className="confirm-pur-btn"
+            onClick={handleCheckout}
+            disabled={totalPrice > wallet}
+          >
+            {totalPrice > wallet ? 'Insufficient Funds' : 'Confirm Purchase'}
+          </button>
+        </div>
       </div>
-      <div className="cart-right-container">
-  <p>Wallet: C$ {wallet.toFixed(2)}</p>
-  <p>Total: C$ {totalPrice.toFixed(2)}</p>
-  <p>Remaining: C$ {(wallet - totalPrice).toFixed(2)}</p>
-  <p>Sales tax will be calculated during checkout</p>
-  <button 
-    className="confirm-pur-btn"
-    onClick={handleCheckout}
-    disabled={totalPrice > wallet}
-  >
-    {totalPrice > wallet ? 'Insufficient Funds' : 'Confirm Purchase'}
-  </button>
-</div>
-    </div>
+    </>
   );
 };
 
