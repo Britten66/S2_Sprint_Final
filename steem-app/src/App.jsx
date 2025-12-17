@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // custome components being imported below
 import Navbar from "./Components/Navbar/Navbar.jsx";
-import LandingPage from "./Pages/Landing-Page/landing.jsx";
+import LandingPage from "./pages/Landing-Page/landing.jsx";
 import LoginPage from "./pages/Log-in-Page/login.jsx";
 import ShoppingCart from "./pages/Shopping-Page/ShoppingCart.jsx";
 import StorePage from "./pages/Store-Page/store.jsx";

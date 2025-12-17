@@ -7,6 +7,7 @@ const LoginPage = () => {
   const [userPass, setUserPass] = useState("");
   const [userEmailErr, setUserEmailErr] = useState("");
   const [userPassErr, setUserPassErr] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   // added async to this below
@@ -14,20 +15,28 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (userEmail === "") {
-      setUserEmailErr("Please enter your E-mail");
-      console.log("Error e-mail cannot be empty");
+      setUserEmailErr("Please enter your E-mail.");
+      // console.log("Error: E-mail cannot be empty.");
       return;
     }
     // Check if Email input is a valided Email.
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(userEmail)) {
-      setUserEmailErr("Please enter a valid email address");
+      setUserEmailErr("Please enter a valid email address.");
+      // console.log("Error: Enter a valid E-mail address.");
       return;
     }
+
     // Check if the password input is empty.
     if (userPass === "") {
-      setUserPassErr("Please enter your password");
-      console.log("Error password canot be empty");
+      setUserPassErr("Please enter your password.");
+      // console.log("Error: Password cannot be empty");
+      return;
+    }
+    // Check if password is less then eight(8) characters
+    if (userPass.length < 8) {
+      setUserPassErr("Password must be at least 8 characters");
+      // console.log("Error: Not enought characters in password");
       return;
     }
 
@@ -37,14 +46,17 @@ const LoginPage = () => {
     // ========================================
 
     // Validate password
-    if (userPass === "") {
-      setUserPassErr("Please enter your password");
-      return;
-    }
+    // if (userPass === "") {
+    //   setUserPassErr("Please enter your password");
+    //   return;
+    // }
 
     // Clear any previous errors
     setUserEmailErr("");
     setUserPassErr("");
+
+    // Set loading state
+    setIsLoading(true);
 
     // Fetch users from JSON Server to check credentials
     try {
@@ -76,6 +88,8 @@ const LoginPage = () => {
       // Error handler
       console.error("Login error:", err);
       setUserEmailErr("Login failed. Check JSON Server is running.");
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -102,8 +116,8 @@ const LoginPage = () => {
                   name="email"
                   required
                   autoComplete="email"
-                  value={userEmail} // 1. Lock the input to our state
-                  onChange={(e) => setUserEmail(e.target.value)} // 2. Update state when typing
+                  value={userEmail} // Lock the input to our state
+                  onChange={(e) => setUserEmail(e.target.value)} // Update state when typing
                 />
                 <label htmlFor="email">Email</label>
                 <span className="input-line"></span>
