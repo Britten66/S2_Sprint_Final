@@ -4,20 +4,21 @@ import { useNavigate } from "react-router-dom";
 import "./ShoppingCart.css";
 
 const ShoppingCart = () => {
-  const { cartItems, handleRemoveCart, handleAddToCart, checkout, wallet } = useCart();
+  const { cartItems, handleRemoveCart, handleAddToCart, checkout, wallet } =
+    useCart();
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   const handleCheckout = async () => {
     const result = await checkout();
-    
+
     if (result.success) {
       setMessage("Purchase successful.");
-      setTimeout(() => navigate('/store'), 2000);
+      setTimeout(() => navigate("/store"), 2000);
     } else {
       setMessage(`${result.message}`);
     }
-    
+
     setTimeout(() => setMessage(""), 3000);
   };
 
@@ -49,10 +50,14 @@ const ShoppingCart = () => {
   const cart = cartItems.map((items) => (
     <div className="cart-item" key={items.id}>
       <img src={items.image} alt={items.title} />
-      <div className="item-info">
+      <div className="item-details">
         <h3>{items.title}</h3>
-        <p>C$ {items.price}</p>
         <p>{items.description}</p>
+      </div>
+      <div className="item-price">
+        <p>C$ {items.price}</p>
+      </div>
+      <div className="item-action">
         <input className="qty-input" value={items.quantity} readOnly />
         <button className="add-btn" onClick={() => handleAddToCart(items)}>
           Add
@@ -75,9 +80,20 @@ const ShoppingCart = () => {
 
       <div className="main-cart-container">
         <h2>Shopping Cart</h2>
-        
+
         {message && (
-          <div style={{gridColumn: 'span 2', textAlign: 'center', padding: '10px', background: message.includes('successful') ? '#4caf50' : '#f44336', color: 'white', borderRadius: '8px'}}>
+          <div
+            style={{
+              gridColumn: "span 2",
+              textAlign: "center",
+              padding: "10px",
+              background: message.includes("successful")
+                ? "#4caf50"
+                : "#f44336",
+              color: "white",
+              borderRadius: "8px",
+            }}
+          >
             {message}
           </div>
         )}
@@ -85,18 +101,18 @@ const ShoppingCart = () => {
         <div className="cart-items-left-container">
           {cart.length === 0 ? `Shopping cart is empty` : cart}
         </div>
-        
+
         <div className="cart-right-container">
           <p>Wallet: C$ {wallet.toFixed(2)}</p>
           <p>Total: C$ {totalPrice.toFixed(2)}</p>
           <p>Remaining: C$ {(wallet - totalPrice).toFixed(2)}</p>
           <p>Sales tax will be calculated during checkout</p>
-          <button 
+          <button
             className="confirm-pur-btn"
             onClick={handleCheckout}
             disabled={totalPrice > wallet}
           >
-            {totalPrice > wallet ? 'Insufficient Funds' : 'Confirm Purchase'}
+            {totalPrice > wallet ? "Insufficient Funds" : "Confirm Purchase"}
           </button>
         </div>
       </div>
