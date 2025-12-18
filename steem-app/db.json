@@ -30,36 +30,120 @@
       "id": "1",
       "title": "Bark Raiders",
       "image": "/assets/Images/barkraider.png",
-      "description": "-New Release-",
+      "description": "Gameplay flows between the surface ruled by lethal machines, and the vibrant underground society of Speranza.",
       "price": 58.99
     },
     {
       "id": "2",
       "title": "Baldur's Gate 3",
       "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg",
-      "description": "Gather your party and return to the Forgotten Realms",
+      "description": "Gather your party and return to the Forgotten Realms in a tale of fellowship and betrayal, sacrifice and survival, and the lure of absolute power",
       "price": 59.99
     },
     {
       "id": "3",
       "title": "Dota 2",
       "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg",
-      "description": "The most-played game on Steam",
+      "description": "When it comes to diversity of heroes, abilities, and powerful items, Dota boasts an endless array—no two games are the same.",
       "price": 0
     },
     {
       "id": "4",
       "title": "Hogwarts Legacy",
-      "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/header.jpg",
-      "description": "Experience Hogwarts in the 1800s",
+      "image": "/assets/Images/hogwarts.png",
+      "description": "Now you can take control of the action and be at the center of your own adventure in the wizarding world.",
       "price": 59.99
     },
     {
       "id": "5",
       "title": "Starfield",
-      "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1716740/header.jpg",
-      "description": "The next generation RPG from Bethesda",
+      "image": "/assets/Images/starfield.png",
+      "description": "In the year 2330, humanity has ventured beyond our solar system, settling new planets, and living as a spacefaring people.",
       "price": 69.99
+    },
+    {
+      "id": "6",
+      "image": "/assets/Images/Hades.png",
+      "title": "Hades",
+      "description": "Defy the god of the dead as you hack and slash out of the Underworld in this rogue-like dungeon crawler from the creators of Bastion, Transistor, and Pyre.",
+      "price": 13.99
+    },
+    {
+      "id": "8",
+      "image": "/assets/Images/keeper.png",
+      "title": "Kepper",
+      "description": "joined by a spirited seabird, embark upon a heartening tale of unlikely companionship, and an unexpected journey into realms beyond understanding.",
+      "price": 19.99
+    },
+    {
+      "id": "9",
+      "image": "/assets/Images/kingdom.png",
+      "title": "Kingdom",
+      "description": "In Kingdom, each coin spent can tip the balance between prosperity and decay. Attend to your domain, border to border, or venture into the wild to discover its wonders and its threats.",
+      "price": 0
+    },
+    {
+      "id": "10",
+      "image": "/assets/Images/marvel.png",
+      "title": "Marvel Rivals",
+      "description": "Assemble an all-star Marvel squad, devise countless strategies by combining powers to form unique Team-Up skills and fight in destructible, ever-changing battlefields across the continually evolving Marvel universe!",
+      "price": 0
+    },
+    {
+      "id": "11",
+      "image": "/assets/Images/pathofexile2.png",
+      "title": "Path of Exile 2",
+      "description": "Set years after the original Path of Exile, you will return to the dark world of Wraeclast and seek to end the corruption that is spreading.",
+      "price": 6.99
+    },
+    {
+      "id": "12",
+      "image": "/assets/Images/satisfactory.png",
+      "title": "Satisfactory",
+      "description": "Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!",
+      "price": 19.99
+    },
+    {
+      "id": "13",
+      "image": "/assets/Images/snow.png",
+      "title": "Snow",
+      "description": "Explore a massive mountain, customize your character with clothing and equipment, compete in events to be the best.",
+      "price": 17.99
+    },
+    {
+      "id": "15",
+      "image": "/assets/Images/thecube.png",
+      "title": "The Cube",
+      "description": " A living world full of memorable characters, diverse biomes, and tons of enemies, including powerful bosses, awaits you.",
+      "price": 14.99
+    },
+    {
+      "id": "16",
+      "image": "/assets/Images/trainwreck.png",
+      "title": "Train Wreck",
+      "description": "Where players become train operators delivering cargo across multiple stations while fending off train robbers set in the wildwest.",
+      "price": 7.99
+    },
+    {
+      "id": "17",
+      "image": "/assets/Images/valhiem.png",
+      "title": "Valhem",
+      "description": "Craft powerful weapons, construct longhouses, and slay mighty foes to prove yourself to Odin!",
+      "price": 14.99
+    },
+    {
+      "id": "18",
+      "image": "/assets/Images/vrising.png",
+      "title": "Vrising",
+      "description": "Awaken as a weakened Vampire after centuries of slumber. Hunt for blood to regain your strength while hiding from the scorching sun to survive.",
+      "price": 21.99
+    },
+    {
+      "id": "19",
+      "image": "/assets/Images/warframe.png",
+      "title": "WarFrame",
+      "description": "Confront warring factions throughout a sprawling interplanetary system as you follow the guidance of the mysterious Lotus and level up your Warframe.",
+      "price": 0
     }
   ],
   "featuredGames": [
