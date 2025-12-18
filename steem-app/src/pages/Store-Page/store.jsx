@@ -7,6 +7,24 @@ function StorePage() {
   const { handleAddToCart } = useCart();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Check login status on mount and listen for changes
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+      setIsLoggedIn(loggedIn);
+    };
+
+    checkLoginStatus();
+    window.addEventListener("walletUpdate", checkLoginStatus);
+
+    return () => {
+      window.removeEventListener("walletUpdate", checkLoginStatus);
+    };
+  }, []);
 
   // Fetch products from API
   useEffect(() => {
@@ -50,6 +68,19 @@ function StorePage() {
     };
   }, []);
 
+  // Check login and handle add to cart with validation
+  const handleAddToCartWithCheck = (product) => {
+    if (!isLoggedIn) {
+      setErrorMessage("Please log in ");
+      setTimeout(() => setErrorMessage(""), 4000);
+      return;
+    }
+
+    handleAddToCart(product);
+    setSuccessMessage(`${product.title} added to cart`);
+    setTimeout(() => setSuccessMessage(""), 3000);
+  };
+
   return (
     <>
       {/* SNOW EFFECTS - Background pattern and falling flakes */}
@@ -58,6 +89,45 @@ function StorePage() {
 
       <div className="store-page">
         <h1>Browse Games</h1>
+
+        {errorMessage && (
+          <div style={{
+            position: "fixed",
+            top: "80px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            padding: "15px",
+            maxWidth: "600px",
+            background: "#b1251bc0",
+            color: "white",
+            textAlign: "center",
+            fontWeight: "500",
+            zIndex: 1001,
+            borderRadius: "8px"
+          }}>
+            {errorMessage}
+          </div>
+        )}
+
+        {successMessage && (
+          <div style={{
+            position: "fixed",
+            top: "80px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            padding: "15px",
+            maxWidth: "600px",
+            background: "#1bb4f1b6",
+            color: "white",
+            textAlign: "center",
+            fontWeight: "500",
+            zIndex: 1001,
+            borderRadius: "8px"
+          }}>
+            {successMessage}
+          </div>
+        )}
+
         <div className="games-grid">
           {loading ? (
             <h2>Loading games...</h2>
@@ -69,7 +139,8 @@ function StorePage() {
                 title={product.title}
                 description={product.description}
                 price={product.price}
-                onAddToCart={() => handleAddToCart(product)}
+                onAddToCart={() => handleAddToCartWithCheck(product)}
+                isLoggedIn={isLoggedIn}
               />
             ))
           )}

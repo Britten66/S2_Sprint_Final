@@ -19,9 +19,13 @@
 
 .login-container {
   width: 100%;
-  max-width: 400px;
+  max-width:    900px;
   position: relative;
-  z-index: 1000;
+  z-index: 10;
+}
+.login-container:hover{
+  z-index: 1020;
+
 }
 
 .login-card {
@@ -34,9 +38,13 @@
   position: relative;
   backdrop-filter: blur(20px);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2000;
+
 }
 
 .login-card::before {
+    z-index: 2000;
+
   content: "";
   position: absolute;
   top: 0;
@@ -50,12 +58,15 @@
 
 .login-card:hover::before {
   opacity: 1;
+    z-index: 2000;
+
 }
 
 .login-card:hover {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 255, 136, 0.1),
     0 0 40px rgba(0, 255, 136, 0.1);
   transform: translateY(-2px);
+
 }
 
 .login-header {

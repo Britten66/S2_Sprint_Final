@@ -42,7 +42,6 @@
   line-height: 1.4;
 }
 
-/* CARD FOOTER - Price and button */
 .game-card-footer {
   display: flex;
   justify-content: space-between;
@@ -70,4 +69,14 @@
 
 .game-card button:hover {
   background: #5aaedb;
+}
+
+.game-card button.disabled {
+  background: #555;
+  color: #999;
+  opacity: 0.6;
+}
+
+.game-card button.disabled:hover {
+  background: #555;
 }

@@ -13,9 +13,17 @@ const ShoppingCart = () => {
     resetWallet,
   } = useCart();
   const [message, setMessage] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const navigate = useNavigate();
 
   const handleCheckout = async () => {
+    // Check if user is logged in before checkout
+    if (!isLoggedIn) {
+      setMessage("Please log in to complete your purchase");
+      setTimeout(() => setMessage(""), 3000);
+      return;
+    }
+
     const result = await checkout();
 
     if (result.success) {
@@ -40,6 +48,21 @@ const ShoppingCart = () => {
 
     setTimeout(() => setMessage(""), 3000);
   };
+
+  // Check login status on mount
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+      setIsLoggedIn(loggedIn);
+    };
+
+    checkLoginStatus();
+    window.addEventListener("walletUpdate", checkLoginStatus);
+
+    return () => {
+      window.removeEventListener("walletUpdate", checkLoginStatus);
+    };
+  }, []);
 
   // SNOWFALL EFFECT
   useEffect(() => {
@@ -139,9 +162,13 @@ const ShoppingCart = () => {
           <button
             className="confirm-pur-btn"
             onClick={handleCheckout}
-            disabled={totalPrice > wallet}
+            disabled={totalPrice > wallet || !isLoggedIn}
           >
-            {totalPrice > wallet ? "Insufficient Funds" : "Confirm Purchase"}
+            {!isLoggedIn
+              ? "Please Log In"
+              : totalPrice > wallet
+              ? "Insufficient Funds"
+              : "Confirm Purchase"}
           </button>
         </div>
       </div>

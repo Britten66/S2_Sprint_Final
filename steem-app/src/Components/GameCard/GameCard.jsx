@@ -1,6 +1,13 @@
 import "./GameCard.css";
 
-function GameCard({ image, title, description, price, onAddToCart }) {
+function GameCard({
+  image,
+  title,
+  description,
+  price,
+  onAddToCart,
+  isLoggedIn,
+}) {
   return (
     <div className="game-card">
       <img src={image} alt={title} />
@@ -10,7 +17,13 @@ function GameCard({ image, title, description, price, onAddToCart }) {
       </div>
       <div className="game-card-footer">
         <span>${price}</span>
-        <button onClick={onAddToCart}>Add to Cart</button>
+        <button
+          onClick={onAddToCart}
+          className={!isLoggedIn ? "disabled" : ""}
+          title={!isLoggedIn ? "Please login" : ""}
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   );

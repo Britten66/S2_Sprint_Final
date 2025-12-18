@@ -47,6 +47,26 @@
   color: #66c0f4;
 }
 
+.navbar-links button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.navbar-links button:hover {
+  color: #66c0f4;
+}
+
+.navbar-username {
+  color: #66c0f4;
+  font-weight: 500;
+}
+
 /* Mobile responsive */
 @media (max-width: 768px) {
   .navbar {
