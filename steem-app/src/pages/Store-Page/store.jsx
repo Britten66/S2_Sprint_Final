@@ -1,10 +1,29 @@
-import { useEffect } from "react";
-import GameCard from "../../Components/GameCard/GameCard.jsx";
+import { useEffect, useState } from "react";import GameCard from "../../Components/GameCard/GameCard.jsx";
 import { useCart } from "../../Components/Context/CartContext.jsx";
 import "./store.css";
 
 function StorePage() {
   const { handleAddToCart } = useCart();
+  const [products, setProducts] = useState([]);
+const [loading, setLoading] = useState(true);
+
+// Fetch products from API
+useEffect(() => {
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/products");
+      const data = await response.json();
+      setProducts(data);
+      setLoading(false);
+    } catch (err) {
+      console.error("Failed to fetch products:", err);
+      setLoading(false);
+    }
+  };
+
+  fetchProducts();
+}, []);
+
   // SNOWFALL EFFECT - Creates falling snowflakes on store page
   useEffect(() => {
     function createSnowflake() {
@@ -39,76 +58,22 @@ function StorePage() {
       <div className="store-page">
         <h1>Browse Games</h1>
 
-        <div className="games-grid">
-          <GameCard
-            image="/assets/Images/barkraider.png"
-            title="Bark Raiders"
-            description="-New Release-"
-            price={58.99}
-            onAddToCart={() =>
-              handleAddToCart({
-                id: "1",
-                image: "/assets/Images/barkraider.png",
-                title: "Bark Raiders",
-                description: "-New Release-",
-                price: 58.99,
-              })
-            }
-          />
-
-          <GameCard
-            image="https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg"
-            title="Baldur's Gate 3"
-            description="Gather your party and return to the Forgotten Realms"
-            price={59.99}
-            onAddToCart={() =>
-              handleAddToCart({
-                id: "2",
-                image:
-                  "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg",
-                title: "Baldur's Gate 3",
-                description:
-                  "Gather your party and return to the Forgotten Realms",
-                price: 59.99,
-              })
-            }
-          />
-
-          <GameCard
-            image="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg"
-            title="Elden Ring"
-            description="An epic action RPG adventure in a vast open world"
-            price={59.99}
-            onAddToCart={() =>
-              handleAddToCart({
-                id: "3",
-                image:
-                  "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg",
-                title: "Elden Ring",
-                description:
-                  "An epic action RPG adventure in a vast open world",
-                price: 59.99,
-              })
-            }
-          />
-
-          <GameCard
-            image="https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg"
-            title="Dota 2"
-            description="The most-played game on Steam"
-            price={0.0}
-            onAddToCart={() =>
-              handleAddToCart({
-                id: "4",
-                image:
-                  "https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg",
-                title: "Dota 2",
-                description: "The most-played game on Steam",
-                price: 0.0,
-              })
-            }
-          />
-        </div>
+       <div className="games-grid">
+  {loading ? (
+    <h2>Loading games...</h2>
+  ) : (
+    products.map((product) => (
+      <GameCard
+        key={product.id}
+        image={product.image}
+        title={product.title}
+        description={product.description}
+        price={product.price}
+        onAddToCart={() => handleAddToCart(product)}
+      />
+    ))
+  )}
+</div>
       </div>
     </>
   );

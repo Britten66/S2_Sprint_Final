@@ -21,6 +21,7 @@ const ShoppingCart = () => {
     if (result.success) {
       setMessage("Purchase successful.");
       setTimeout(() => navigate("/store"), 2000);
+      setMessage(result.message);
     } else {
       setMessage(`${result.message}`);
     }
@@ -32,9 +33,9 @@ const ShoppingCart = () => {
     const result = await resetWallet();
 
     if (result.success) {
-      setMessage("Wallet reset to $200!");
+        setMessage(result.message);
     } else {
-      setMessage(result.message);
+       setMessage(result.message);
     }
 
     setTimeout(() => setMessage(""), 3000);
@@ -102,7 +103,7 @@ const ShoppingCart = () => {
               textAlign: "center",
               padding: "10px",
               background:
-                message.includes("successful") || message.includes("reset")
+                message.includes("successful") || message.includes("Synced")
                   ? "#4caf50"
                   : "#f44336",
               color: "white",

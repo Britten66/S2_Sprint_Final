@@ -8,48 +8,33 @@ import "./landing.css";
 // featured games here
 
 // this is a hard coded section with images linked by https
-const FEATURED_GAMES = [
-  {
-    id: 1,
-    name: "Elden Ring",
-    image:
-      "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg",
-    rating: 4.8,
-  },
-  {
-    id: 2,
-    name: "Baldur's Gate 3",
-    image:
-      "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg",
-    rating: 4.9,
-  },
-  {
-    id: 3,
-    name: "Dota 2",
-    image: "https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg",
-    rating: 4.7,
-  },
-  {
-    id: 4,
-    name: "Hogwarts Legacy",
-    image:
-      "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/header.jpg",
-    rating: 4.6,
-  },
-  {
-    id: 5,
-    name: "Starfield",
-    image:
-      "https://cdn.cloudflare.steamstatic.com/steam/apps/1716740/header.jpg",
-    rating: 4.2,
-  },
-];
+
 
 // landing page with navigation
 function LandingPage() {
   const navigate = useNavigate();
   // current index set state = 0
   const [currentIndex, setCurrentIndex] = useState(0);
+
+const [featuredGames, setFeaturedGames] = useState([]);
+const [loading, setLoading] = useState(true);
+const [isPaused, setIsPaused] = useState(false);
+// Fetch featured games from API
+useEffect(() => {
+  const fetchFeaturedGames = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/featuredGames");
+      const data = await response.json();
+      setFeaturedGames(data);
+      setLoading(false);
+    } catch (err) {
+      console.error("Failed to fetch featured games:", err);
+      setLoading(false);
+    }
+  };
+
+  fetchFeaturedGames();
+}, []);
 
   // SNOWFALL EFFECT - Creates falling snowflakes when component loads
   useEffect(() => {
@@ -83,7 +68,7 @@ function LandingPage() {
   const nextSlide = () => {
     setCurrentIndex((prev) =>
       //if game length = last slide look back to 0 OR just add one " : < - this is sneaky "
-      prev === FEATURED_GAMES.length - 1 ? 0 : prev + 1
+      prev === featuredGames.length - 1 ? 0 : prev + 1
     );
   };
   // like this 4 === 4 ? (loops back)
@@ -94,26 +79,37 @@ function LandingPage() {
       // HERE if we are on the FIRST slide we are going to loop to the last slide ( - 1 )
       // otherwise it just will subtract 1
       // usign the :
-      prev === 0 ? FEATURED_GAMES.length - 1 : prev - 1
+      prev === 0 ? featuredGames.length - 1 : prev - 1
     );
   };
 
   //0 === 0  = YES (loops to end) = 4
   // this is good practice because it keeps everything up to the most recent state increasing efficiency
-  const [isPaused, setIsPaused] = useState(false);
-  // 2. NEW EFFECT: Auto-scroll functionality
-  useEffect(() => {
-    // If paused, don't set the interval
-    if (isPaused) return;
+useEffect(() => {
+  if (isPaused || featuredGames.length === 0) return;  // Add the || check
 
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 3000); // <-- Change this number to speed up/slow down (3000 = 3 secs)
+  const interval = setInterval(() => {
+    nextSlide();
+  }, 3000);
 
-    // Clear interval on cleanup so we don't have multiple timers running
-    return () => clearInterval(interval);
-  }, [isPaused]);
+  return () => clearInterval(interval);
+}, [isPaused, featuredGames.length]); 
 
+
+if (loading || featuredGames.length === 0) {
+  return (
+    <>
+      <div className="snow"></div>
+      <div className="snowfall"></div>
+      <div className="landing-page">
+        <section className="hero">
+          <h2>Welcome</h2>
+          <p>Loading...</p>
+        </section>
+      </div>
+    </>
+  );
+}
   // inside this return statemetn is the content being displayed on the page
   // below will just contain the portion of the landing page with the intro and CTA to enter our store.
 
@@ -142,11 +138,11 @@ function LandingPage() {
               <div className="carousel-content">
                 <img
                   className="game-image"
-                  src={FEATURED_GAMES[currentIndex].image}
-                  alt={FEATURED_GAMES[currentIndex].name}
+                  src={featuredGames[currentIndex].image}
+                  alt={featuredGames[currentIndex].name}
                 />
-                <h3>{FEATURED_GAMES[currentIndex].name}</h3>
-                <p>Recent Rating: {FEATURED_GAMES[currentIndex].rating}/5</p>
+                <h3>{featuredGames[currentIndex].name}</h3>
+                <p>Recent Rating: {featuredGames[currentIndex].rating}/5</p>
               </div>
 
               <button className="carousel-btn" onClick={nextSlide}>
@@ -155,7 +151,7 @@ function LandingPage() {
             </div>
 
             <div className="dots">
-              {FEATURED_GAMES.map((_, index) => (
+              {featuredGames.map((_, index) => (
                 <span
                   key={index}
                   className={index === currentIndex ? "active" : ""}

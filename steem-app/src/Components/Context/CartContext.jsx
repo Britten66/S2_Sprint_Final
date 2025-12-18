@@ -7,56 +7,73 @@ export const CartProvider = ({ children }) => {
   const [wallet, setWallet] = useState(0);
 
   // Load wallet from localStorage and set up listeners
-  useEffect(() => {
-    // 1. Initial Load
-    const savedWallet = localStorage.getItem("wallet");
-    if (savedWallet) {
-      setWallet(parseFloat(savedWallet));
-    }
-
-    // 2. Define the handler inside useEffect to keep it scoped
-    const handleStorageChange = () => {
-      const newWallet = localStorage.getItem("wallet");
-      if (newWallet) {
-        setWallet(parseFloat(newWallet));
-      }
-    };
-
-    // 3. Add Listeners
-    window.addEventListener('storage', handleStorageChange);
-    window.addEventListener('walletUpdate', handleStorageChange);
-
-    // 4. CLEANUP: This runs when the component unmounts
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('walletUpdate', handleStorageChange);
-    };
-  }, []); // Empty dependency array ensures this only runs once
-
-  // Reset Wallet function
-  const resetWallet = async () => {
+  // Load wallet from database on mount
+useEffect(() => {
+  const loadWalletFromDB = async () => {
     const userId = localStorage.getItem("userId");
-    const resetAmount = 200; // Fixed amount
+    if (!userId) return;
 
     try {
-      await fetch(`http://localhost:3001/users/${userId}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ wallet: resetAmount }) 
-      });
-
-      setWallet(resetAmount); 
-      localStorage.setItem("wallet", resetAmount); 
-
-      // Trigger custom event so other components know to update
-      window.dispatchEvent(new Event('walletUpdate'));
-
-      return { success: true, message: "Wallet reset to $200!" };
+      const response = await fetch(`http://localhost:3001/users/${userId}`);
+      const userData = await response.json();
+      
+      if (userData && userData.wallet !== undefined) {
+        setWallet(userData.wallet);
+        localStorage.setItem("wallet", userData.wallet);
+      }
     } catch (err) {
-      console.error("Reset failed:", err);
-      return { success: false, message: "Reset failed" };
+      console.error("Failed to load wallet:", err);
+      const savedWallet = localStorage.getItem("wallet");
+      if (savedWallet) {
+        setWallet(parseFloat(savedWallet));
+      }
     }
   };
+
+  loadWalletFromDB();
+
+  const handleStorageChange = () => {
+    const newWallet = localStorage.getItem("wallet");
+    if (newWallet) {
+      setWallet(parseFloat(newWallet));
+    }
+  };
+
+  window.addEventListener('storage', handleStorageChange);
+  window.addEventListener('walletUpdate', handleStorageChange);
+
+  return () => {
+    window.removeEventListener('storage', handleStorageChange);
+    window.removeEventListener('walletUpdate', handleStorageChange);
+  };
+}, []);
+  // Reset Wallet function
+const resetWallet = async () => {
+  const userId = localStorage.getItem("userId");
+
+  try {
+    const response = await fetch(`http://localhost:3001/users/${userId}`);
+    const userData = await response.json();
+    
+    const resetAmount = userData.startingWallet;  // Use startingWallet instead
+
+    // UPDATE the database back to starting amount
+    await fetch(`http://localhost:3001/users/${userId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ wallet: resetAmount })
+    });
+
+    setWallet(resetAmount); 
+    localStorage.setItem("wallet", resetAmount); 
+    window.dispatchEvent(new Event('walletUpdate'));
+
+    return { success: true, message: `Wallet reset to $${resetAmount}!` };
+  } catch (err) {
+    console.error("Reset failed:", err);
+    return { success: false, message: "Reset failed" };
+  }
+};
 
   // AddToCart function
   const handleAddToCart = (productToAdd) => {
