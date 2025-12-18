@@ -6,30 +6,74 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [wallet, setWallet] = useState(0);
 
-  // Load wallet from localStorage
-  useEffect(() => {
-    const savedWallet = localStorage.getItem("wallet"); 
-    if (savedWallet) {
-      setWallet(parseFloat(savedWallet));
+  // Load wallet from localStorage and set up listeners
+  // Load wallet from database on mount
+useEffect(() => {
+  const loadWalletFromDB = async () => {
+    const userId = localStorage.getItem("userId");
+    if (!userId) return;
+
+    try {
+      const response = await fetch(`http://localhost:3001/users/${userId}`);
+      const userData = await response.json();
+      
+      if (userData && userData.wallet !== undefined) {
+        setWallet(userData.wallet);
+        localStorage.setItem("wallet", userData.wallet);
+      }
+    } catch (err) {
+      console.error("Failed to load wallet:", err);
+      const savedWallet = localStorage.getItem("wallet");
+      if (savedWallet) {
+        setWallet(parseFloat(savedWallet));
+      }
     }
+  };
 
+  loadWalletFromDB();
 
-  // here im adding an event listener
   const handleStorageChange = () => {
     const newWallet = localStorage.getItem("wallet");
-    if(newWallet){
+    if (newWallet) {
       setWallet(parseFloat(newWallet));
     }
   };
-// Look over these ***
-  window .addEventListener('storage', handleStorageChange);
+
+  window.addEventListener('storage', handleStorageChange);
   window.addEventListener('walletUpdate', handleStorageChange);
-  //listeners for unmounting >>> ???? ******* 
- return () => {
+
+  return () => {
     window.removeEventListener('storage', handleStorageChange);
     window.removeEventListener('walletUpdate', handleStorageChange);
   };
 }, []);
+  // Reset Wallet function
+const resetWallet = async () => {
+  const userId = localStorage.getItem("userId");
+
+  try {
+    const response = await fetch(`http://localhost:3001/users/${userId}`);
+    const userData = await response.json();
+    
+    const resetAmount = userData.startingWallet;  // Use startingWallet instead
+
+    // UPDATE the database back to starting amount
+    await fetch(`http://localhost:3001/users/${userId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ wallet: resetAmount })
+    });
+
+    setWallet(resetAmount); 
+    localStorage.setItem("wallet", resetAmount); 
+    window.dispatchEvent(new Event('walletUpdate'));
+
+    return { success: true, message: `Wallet reset to $${resetAmount}!` };
+  } catch (err) {
+    console.error("Reset failed:", err);
+    return { success: false, message: "Reset failed" };
+  }
+};
 
   // AddToCart function
   const handleAddToCart = (productToAdd) => {
@@ -106,7 +150,14 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cartItems, wallet, handleAddToCart, handleRemoveCart, checkout }}
+      value={{ 
+        cartItems, 
+        wallet, 
+        handleAddToCart, 
+        handleRemoveCart, 
+        checkout,
+        resetWallet  // Add resetWallet to the context value
+      }}
     >
       {children}
     </CartContext.Provider>
