@@ -41,38 +41,92 @@ body {
   margin-top: 20px;
 }
 
+/* Container for the whole row */
 .cart-item {
   display: flex;
+  align-items: center; /* Centers items vertically */
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle separator line */
+  background-color: rgba(0, 0, 0, 0.2); /* Darker background for the item row */
   margin-bottom: 10px;
+  border-radius: 4px;
 }
 
+/* Image styling */
 .cart-item img {
-  width: 180px;
-  height: 150px;
-  padding: 4px;
+  width: 120px; /* Fixed width so they align */
+  height: 70px; /* Fixed height */
+  object-fit: cover; /* Prevents image stretching/distortion */
+  border-radius: 4px;
+  margin-right: 20px;
 }
 
-.item-info {
+/* 1. Middle Section: Takes up all extra space */
+.item-details {
+  flex: 1;
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 20px;
+  text-align: left;
 }
 
-.add-btn {
-  margin: auto;
-  color: white;
-  background: linear-gradient(135deg, #1b2838d4 0%, #2a475e50 100%);
+.item-details h3 {
+  margin: 0 0 5px 0;
+  color: #fff;
+  font-size: 1.1rem;
 }
 
-.remove-btn {
-  margin: auto;
-  color: white;
-  background: linear-gradient(135deg, #1b2838d4 0%, #2a475e50 100%);
+.item-details p {
+  margin: 0;
+  color: #a3b3c5;
+  font-size: 0.9rem;
+}
+
+/* Price Section */
+.item-price {
+  font-weight: bold;
+  color: #66c0f4; /* Steam blue color */
+  margin-right: 30px;
+  min-width: 80px; /* Ensures price doesn't jump around */
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between buttons */
 }
 
 .qty-input {
-  margin: auto;
-  max-width: 20px;
+  width: 30px;
+  text-align: center;
+  background: #171a21;
+  border: 1px solid #4b5563;
+  color: white;
+  border-radius: 2px;
+  padding: 5px;
 }
 
+/* Button Refinements */
+.add-btn,
+.remove-btn {
+  padding: 5px 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 2px;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.add-btn:hover {
+  background: #66c0f4;
+  color: black;
+}
+
+.remove-btn:hover {
+  background: #ff4d4d;
+  color: white;
+}
 /* =========================================
    ANIMATED PNG FLAKES
    - Uses 3 layered PNGs
@@ -95,4 +149,62 @@ body {
 
   /* Single standard animation, no vendor prefixes needed now */
   animation: snow 20s linear infinite;
+}
+
+@media (max-width: 900px) {
+  .main-cart-container {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    margin-top: 40px;
+  }
+
+  .main-cart-container h2 {
+    grid-column: span 1; /* Fixes the title spanning logic */
+    text-align: center;
+  }
+
+  .cart-items-left-container {
+    min-width: 0;
+    width: 95%;
+    margin: 10px 0;
+  }
+
+  .cart-right-container {
+    min-width: 0;
+    width: 95%;
+    margin: 10px 0;
+  }
+
+  .cart-item {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center everything */
+    text-align: center;
+    padding: 20px;
+    height: auto;
+  }
+
+  .cart-item img {
+    margin-right: 0; /* Remove side margin */
+    margin-bottom: 15px; /* Add bottom margin */
+    width: 100%; /* Optional: Make image larger on mobile */
+    max-width: 250px; /* Cap the size */
+    height: auto;
+  }
+
+  .item-details {
+    margin-right: 0;
+    margin-bottom: 10px;
+    align-items: center; /* Center the text alignment */
+  }
+
+  .item-price {
+    margin-right: 0;
+    margin-bottom: 10px;
+    font-size: 1.2rem; /* Make price slightly bigger on mobile */
+  }
+
+  .item-actions {
+    justify-content: center;
+    width: 100%;
+  }
 }

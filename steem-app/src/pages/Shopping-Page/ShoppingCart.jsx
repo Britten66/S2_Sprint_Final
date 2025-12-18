@@ -33,9 +33,9 @@ const ShoppingCart = () => {
     const result = await resetWallet();
 
     if (result.success) {
-        setMessage(result.message);
+      setMessage(result.message);
     } else {
-       setMessage(result.message);
+      setMessage(result.message);
     }
 
     setTimeout(() => setMessage(""), 3000);
@@ -69,10 +69,14 @@ const ShoppingCart = () => {
   const cart = cartItems.map((items) => (
     <div className="cart-item" key={items.id}>
       <img src={items.image} alt={items.title} />
-      <div className="item-info">
+      <div className="item-details">
         <h3>{items.title}</h3>
-        <p>C$ {items.price}</p>
         <p>{items.description}</p>
+      </div>
+      <div className="item=price">
+        <p>C$ {items.price}</p>
+      </div>
+      <div className="item-action">
         <input className="qty-input" value={items.quantity} readOnly />
         <button className="add-btn" onClick={() => handleAddToCart(items)}>
           Add
