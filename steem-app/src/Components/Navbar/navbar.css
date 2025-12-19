@@ -10,7 +10,7 @@
   align-items: center;
   padding: 1rem 2rem;
   background-color: #1b2838;
-  color: white;
+  color: rgba(0, 0, 0, 0.332);
   z-index: 1000;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
