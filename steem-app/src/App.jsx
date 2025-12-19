@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar.jsx";
 import LandingPage from "./pages/Landing-Page/landing.jsx";
 import LoginPage from "./pages/Log-in-Page/login.jsx";
-import ShoppingCart from "./Pages/Shopping-Page/ShoppingCart.jsx";
+import ShoppingCart from "./pages/Shopping-Page/ShoppingCart.jsx";
 import StorePage from "./pages/Store-Page/store.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
 import { CartProvider } from "./Components/Context/CartContext.jsx";
