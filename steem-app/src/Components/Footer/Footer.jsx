@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./footer.css";
+import "./Footer.css";
 
 function Footer() {
   // State to track buildup height and clearing status
