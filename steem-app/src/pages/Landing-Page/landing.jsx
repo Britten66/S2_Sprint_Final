@@ -23,7 +23,7 @@ const [isPaused, setIsPaused] = useState(false);
 useEffect(() => {
   const fetchFeaturedGames = async () => {
     try {
-      const response = await fetch("http://localhost:3001/featuredGames");
+      const response = await fetch("https://sprint-final-endpoint.onrender.com/featuredGames");
       const data = await response.json();
       setFeaturedGames(data);
       setLoading(false);

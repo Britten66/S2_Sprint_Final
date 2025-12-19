@@ -88,7 +88,7 @@ const LoginPage = () => {
 
     // Fetch users from JSON Server to check credentials
     try {
-      const response = await fetch("http://localhost:3001/users");
+      const response = await fetch("https://sprint-final-endpoint.onrender.com/users");
       const users = await response.json();
 
       // Find user with matching email and password

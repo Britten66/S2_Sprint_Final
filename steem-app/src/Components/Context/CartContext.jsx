@@ -14,7 +14,7 @@ useEffect(() => {
     if (!userId) return;
 
     try {
-      const response = await fetch(`http://localhost:3001/users/${userId}`);
+      const response = await fetch(`https://sprint-final-endpoint.onrender.com/users/${userId}`);
       const userData = await response.json();
       
       if (userData && userData.wallet !== undefined) {
@@ -52,13 +52,13 @@ const resetWallet = async () => {
   const userId = localStorage.getItem("userId");
 
   try {
-    const response = await fetch(`http://localhost:3001/users/${userId}`);
+    const response = await fetch(`https://sprint-final-endpoint.onrender.com/users/${userId}`);
     const userData = await response.json();
-    
+
     const resetAmount = userData.startingWallet;  // Use startingWallet instead
 
     // UPDATE the database back to starting amount
-    await fetch(`http://localhost:3001/users/${userId}`, {
+    await fetch(`https://sprint-final-endpoint.onrender.com/users/${userId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ wallet: resetAmount })
@@ -132,7 +132,7 @@ const resetWallet = async () => {
     try {
       const newWallet = wallet - total;
 
-      await fetch(`http://localhost:3001/users/${userId}`, {
+      await fetch(`https://sprint-final-endpoint.onrender.com/users/${userId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ wallet: newWallet }),

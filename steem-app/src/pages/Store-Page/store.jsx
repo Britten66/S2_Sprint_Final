@@ -30,7 +30,7 @@ function StorePage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:3001/products");
+        const response = await fetch("https://sprint-final-endpoint.onrender.com/products");
         const data = await response.json();
         setProducts(data);
         setLoading(false);
